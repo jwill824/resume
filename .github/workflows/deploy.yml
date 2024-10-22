@@ -7,7 +7,6 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
-# Add permissions block
 permissions:
   contents: write
   pages: write
@@ -71,10 +70,18 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
+      # Create artifacts directory and copy files
+      - name: Prepare deployment
+        run: |
+          mkdir -p _site
+          cp index.html _site/
+          cp styles.css _site/
+          cp resume.pdf _site/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: '_site'
 
       - name: Deploy to GitHub Pages
         id: deployment
