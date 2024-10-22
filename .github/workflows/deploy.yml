@@ -23,6 +23,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Debug step to understand the environment
+      - name: Debug Environment
+        run: |
+          echo "Current working directory: $PWD"
+          echo "Directory contents:"
+          ls -la
+          echo "Repository root contents:"
+          ls -la $GITHUB_WORKSPACE
+          echo "Git status:"
+          git status
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -33,35 +44,42 @@ jobs:
           npm init -y
           npm install puppeteer
 
-      - name: Generate PDF
+      # Prepare site directory with explicit paths
+      - name: Prepare deployment
         run: |
-          cat << 'EOF' > generate-pdf.js
-          const puppeteer = require('puppeteer');
-          const fs = require('fs');
+          echo "Creating _site directory..."
+          mkdir -p _site
           
-          (async () => {
-            const browser = await puppeteer.launch();
-            const page = await browser.newPage();
-            
-            await page.goto(`file:${process.cwd()}/index.html`, {
-              waitUntil: 'networkidle0'
-            });
-            
-            await page.pdf({
-              path: 'resume.pdf',
-              format: 'A4',
-              margin: {
-                top: '20px',
-                right: '20px',
-                bottom: '20px',
-                left: '20px'
-              }
-            });
-            
-            await browser.close();
-          })();
-          EOF
+          echo "Copying files with full paths..."
+          echo "Current directory: $(pwd)"
+          echo "Files available:"
+          ls -la
+          
+          # Copy files with error checking
+          for file in index.html styles.css; do
+            if [ -f "$file" ]; then
+              echo "Copying $file..."
+              cp "$file" _site/
+            else
+              echo "Warning: $file not found in $(pwd)"
+              exit 1
+            fi
+          done
+          
+          # Generate PDF before copying
+          echo "Generating PDF..."
           node generate-pdf.js
+          
+          if [ -f "resume.pdf" ]; then
+            echo "Copying resume.pdf..."
+            cp resume.pdf _site/
+          else
+            echo "Warning: resume.pdf not found"
+            exit 1
+          fi
+          
+          echo "Final _site contents:"
+          ls -la _site/
 
       - name: Validate HTML
         run: |
@@ -69,14 +87,6 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
-
-      # Create artifacts directory and copy files
-      - name: Prepare deployment
-        run: |
-          mkdir -p _site
-          cp index.html _site/
-          cp styles.css _site/
-          cp resume.pdf _site/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -89,7 +99,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # Upload PDF as artifact
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
@@ -97,7 +106,6 @@ jobs:
           path: resume.pdf
           if-no-files-found: error
 
-      # Create release with PDF if this is a tag
       - name: Create Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v1
