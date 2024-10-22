@@ -5,12 +5,21 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-  # Allow manual trigger
   workflow_dispatch:
+
+# Add permissions block
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -35,12 +44,10 @@ jobs:
             const browser = await puppeteer.launch();
             const page = await browser.newPage();
             
-            // Load the HTML file
             await page.goto(`file:${process.cwd()}/index.html`, {
               waitUntil: 'networkidle0'
             });
             
-            // Create PDF
             await page.pdf({
               path: 'resume.pdf',
               format: 'A4',
@@ -61,14 +68,19 @@ jobs:
         run: |
           npx html-validate index.html
 
-      # Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          branch: gh-pages
-          folder: .
-          # Optional: Add custom domain if you have one
-          # cname: your-domain.com
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       # Upload PDF as artifact
       - name: Upload PDF artifact
