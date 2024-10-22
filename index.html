@@ -1,149 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeffrey (Jeff) Williams - Software Engineer</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Jeffrey (Jeff) Williams</h1>
-            <div class="contact-info">
-                Software Engineer | Grand Rapids, Michigan<br>
-                <a href="mailto:jeffwilliams824@gmail.com">jeffwilliams824@gmail.com</a> |
-                <a href="https://www.linkedin.com/in/jeffrey-williams-2639576a">LinkedIn</a>
-            </div>
-            <div class="download-container">
-                <a href="resume.pdf" class="download-button" download>
-                    Download Resume (PDF)
-                </a>
-            </div>
-        </header>
+---
+layout: default
+---
 
-        <section id="summary">
-            <h2>Professional Summary</h2>
-            <p>
-                Versatile Software Engineer with extensive experience in developing and optimizing enterprise-level applications. Demonstrated expertise in object-oriented programming, cross-platform development, and advanced testing methodologies. Proficient in .NET, Java, and cloud technologies with a passion for continuous learning and innovation. Committed to delivering scalable, secure, and user-friendly solutions while adhering to best practices and industry standards.
-            </p>
-        </section>
-
-        <section id="skills">
-            <h2>Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <strong>Languages &amp; Frameworks:</strong> C# (.NET 8, .NET Core, Entity Framework), Java (SpringBoot), Python, JavaScript, SQL
-                </div>
-                <div class="skill-category">
-                    <strong>Web Technologies:</strong> ASP.NET Core, Blazor WASM, Angular, React, HTML/CSS
-                </div>
-                <div class="skill-category">
-                    <strong>Cloud &amp; DevOps:</strong> AWS, Azure, OpenShift, Kubernetes, Docker, Terraform, GitHub Actions, Jenkins
-                </div>
-                <div class="skill-category">
-                    <strong>Databases:</strong> MS SQL Server, Oracle, MySQL, Stored Procedures
-                </div>
-                <div class="skill-category">
-                    <strong>API &amp; Integration:</strong> REST (OpenAPI), SOAP, HL7, Epic Interconnect
-                </div>
-                <div class="skill-category">
-                    <strong>Architecture &amp; Patterns:</strong> Microservices, SOA, Event-driven, OOP, SOLID, Design Patterns
-                </div>
-                <div class="skill-category">
-                    <strong>Testing:</strong> Unit (xUnit, JUnit, BUnit), Integration, End-to-end, Karate, Cucumber
-                </div>
-                <div class="skill-category">
-                    <strong>Monitoring:</strong> Splunk, Dynatrace, AppDynamics, OpenSearch
-                </div>
-            </div>
-        </section>
-
-        <section id="experience">
-            <h2>Professional Experience</h2>
-            <div class="experience-item">
-                <div class="experience-header">
-                    <span class="company">Leading EDJE Consultant / Solutions Developer | Crown Equipment</span>
-                    <span class="date">May 2024 - Present</span>
-                </div>
-                <ul>
-                    <li>Spearheaded a large-scale migration of 180+ production repositories from Bamboo to GitHub Actions, encompassing microservices, libraries, and UIs across multiple technologies (Java, Angular, Python)</li>
-                    <li>Leveraged Terraform for Infrastructure as Code (IaC) to manage GitHub repositories, runners, and AWS resources consistently and idempotently</li>
-                    <li>Developed custom linters and documentation generators for GitHub Actions using Python and JavaScript, improving code quality and maintainability</li>
-                    <li>Implemented complex CI/CD pipelines handling various build processes, AWS integrations, and deployment strategies across multiple environments</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <div class="experience-header">
-                    <span class="company">Leading EDJE Consultant / Solutions Developer | Leaf Home Solutions</span>
-                    <span class="date">Oct 2022 - May 2024</span>
-                </div>
-                <ul>
-                    <li>Architected and developed a Blazor WebAssembly app using .NET 7, deployed via Terraform to Azure, significantly enhancing Leaf Home Gutter job management efficiency</li>
-                    <li>Implemented comprehensive job and service ticket checklists, improving installer workflow and data accuracy</li>
-                    <li>Designed reusable Blazor components and conducted thorough testing using BUnit and xUnit, ensuring high code quality and reliability</li>
-                    <li>Led NetSuite integration efforts in a legacy .NET application, implementing new accounting workflows</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <div class="experience-header">
-                    <span class="company">Leading EDJE Consultant / Solutions Developer | Crown Equipment</span>
-                    <span class="date">Jan 2022 - Sep 2022</span>
-                </div>
-                <ul>
-                    <li>Developed and optimized AWS-hosted Java APIs for the InfoLink 6 system, resulting in 7 high-performance, customer-facing APIs</li>
-                    <li>Utilized Agile methodologies to collaborate with cross-functional teams, successfully meeting project deadlines</li>
-                    <li>Created comprehensive Java Karate test suites, improving overall system reliability and performance</li>
-                    <li>Developed Dynatrace dashboards for enhanced system monitoring and quick issue resolution</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <div class="experience-header">
-                    <span class="company">Application Development Analyst | Corewell Health</span>
-                    <span class="date">May 2014 - Jan 2022</span>
-                </div>
-                <ul>
-                    <li>Engineered a SOAP API integrating Epic and Cerner systems for the MyHealth app, significantly enhancing patient data accessibility</li>
-                    <li>Led innovation initiatives and documentation efforts as part of the Center of Excellence</li>
-                    <li>Achieved Epic Interconnect certification and built REST services, maintaining Goldstar rating</li>
-                    <li>Successfully migrated services from OpenShift to AWS, resulting in cost savings and improved scalability</li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="education">
-            <h2>Education</h2>
-            <div class="experience-item">
-                <div class="experience-header">
-                    <span class="company">Western Michigan University</span>
-                    <span class="date">Sep 2010 - Dec 2013</span>
-                </div>
-                <div>Bachelor of Science in Computer Science</div>
-            </div>
-        </section>
-
-        <section id="certifications">
-            <h2>Certifications &amp; Professional Development</h2>
-            <ul>
-                <li>Microsoft Certified: Azure Fundamentals</li>
-                <li>HL7 FHIR Fundamentals Course</li>
-                <li>Epic Chronicles Database Programmer Certification</li>
-                <li>Epic Interconnect Programmer Certification</li>
-                <li>AWS Partner: Accreditation (Technical)</li>
-                <li>Pursuing AWS Developer Associate and Azure Developer Associate Certifications</li>
-            </ul>
-        </section>
-
-        <section id="projects">
-            <h2>Side Projects</h2>
-            <ul>
-                <li>Developed an AI-driven sports gambling prediction model using Azure ML and Azure Data Studio with Spectre Console .NET, with a projected 10% ROI on NCAA March Madness Tournament</li>
-                <li>Currently working on a Table Tennis ELO rating system in Python, demonstrating initiative and diverse programming skills</li>
-            </ul>
-        </section>
+<header>
+    <h1>{{ site.data.resume.contact.name }}</h1>
+    <div class="contact-info">
+        {{ site.data.resume.contact.title }} | {{ site.data.resume.contact.location }}<br>
+        <a href="mailto:{{ site.data.resume.contact.email }}">{{ site.data.resume.contact.email }}</a> |
+        <a href="https://www.linkedin.com/in/{{ site.data.resume.contact.linkedin }}">LinkedIn</a>
     </div>
-</body>
-</html>
+    <div class="download-container">
+        <a href="resume.pdf" class="download-button" download>
+            Download Resume (PDF)
+        </a>
+    </div>
+</header>
+
+<section id="summary">
+    <h2>Professional Summary</h2>
+    <p>{{ site.data.resume.summary }}</p>
+</section>
+
+<section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+        {% for skill in site.data.resume.skills %}
+        <div class="skill-category">
+            <strong>{{ skill.category }}:</strong> {{ skill.items }}
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="experience">
+    <h2>Professional Experience</h2>
+    {% for job in site.data.resume.experience %}
+    <div class="experience-item">
+        <div class="experience-header">
+            <span class="company">{{ job.company }} | {{ job.organization }}</span>
+            <span class="date">{{ job.date }}</span>
+        </div>
+        <ul>
+            {% for achievement in job.achievements %}
+            <li>{{ achievement }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+</section>
+
+<section id="education">
+    <h2>Education</h2>
+    {% for edu in site.data.resume.education %}
+    <div class="experience-item">
+        <div class="experience-header">
+            <span class="company">{{ edu.institution }}</span>
+            <span class="date">{{ edu.date }}</span>
+        </div>
+        <div>{{ edu.degree }}</div>
+    </div>
+    {% endfor %}
+</section>
+
+<section id="certifications">
+    <h2>Certifications &amp; Professional Development</h2>
+    <ul>
+        {% for cert in site.data.resume.certifications %}
+        <li>{{ cert }}</li>
+        {% endfor %}
+    </ul>
+</section>
+
+<section id="projects">
+    <h2>Side Projects</h2>
+    <ul>
+        {% for project in site.data.resume.projects %}
+        <li>{{ project }}</li>
+        {% endfor %}
+    </ul>
+</section>
