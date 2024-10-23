@@ -67,10 +67,24 @@ jobs:
             });
             const page = await browser.newPage();
             
-            // Use the Jekyll-built file
+            // Wait for styles to load
             await page.goto(`file:${process.cwd()}/_site/index.html`, {
               waitUntil: 'networkidle0'
             });
+
+            // Inject styles directly for PDF generation
+            await page.addStyleTag({
+              path: '_site/assets/css/styles.css'
+            });
+
+            // Set viewport for better PDF rendering
+            await page.setViewport({
+              width: 1200,
+              height: 800
+            });
+
+            // Wait for any animations/transitions
+            await page.waitForTimeout(1000);
             
             await page.pdf({
               path: '_site/resume.pdf',
@@ -80,7 +94,8 @@ jobs:
                 right: '20px',
                 bottom: '20px',
                 left: '20px'
-              }
+              },
+              printBackground: true  // Important for background colors
             });
             
             await browser.close();

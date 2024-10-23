@@ -79,12 +79,12 @@ education:
     date: Sep 2010 - Dec 2013
 
 certifications:
-  - Microsoft Certified: Azure Fundamentals
-  - HL7 FHIR Fundamentals Course
-  - Epic Chronicles Database Programmer Certification
-  - Epic Interconnect Programmer Certification
-  - AWS Partner: Accreditation (Technical)
-  - Pursuing AWS Developer Associate and Azure Developer Associate Certifications
+  - title: "Microsoft Certified: Azure Fundamentals"
+  - title: "HL7 FHIR Fundamentals Course"
+  - title: "Epic Chronicles Database Programmer Certification"
+  - title: "Epic Interconnect Programmer Certification"
+  - title: "AWS Partner: Accreditation (Technical)"
+  - title: "Pursuing AWS Developer Associate and Azure Developer Associate Certifications"
 
 projects:
   - Developed an AI-driven sports gambling prediction model using Azure ML and Azure Data Studio with Spectre Console .NET, with a projected 10% ROI on NCAA March Madness Tournament

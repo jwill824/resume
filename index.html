@@ -63,7 +63,7 @@ layout: default
     <h2>Certifications &amp; Professional Development</h2>
     <ul>
         {% for cert in site.data.resume.certifications %}
-        <li>{{ cert }}</li>
+        <li>{{ cert.title }}</li>
         {% endfor %}
     </ul>
 </section>

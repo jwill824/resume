@@ -1,0 +1,56 @@
+@media print {
+    body {
+        background-color: white !important;
+        font-size: 12pt;
+    }
+
+    .container {
+        max-width: none;
+        margin: 0;
+        padding: 20px;
+        box-shadow: none;
+    }
+
+    .download-container {
+        display: none;
+    }
+
+    h1 {
+        font-size: 24pt;
+        margin-bottom: 10pt;
+    }
+
+    h2 {
+        font-size: 18pt;
+        margin-top: 15pt;
+        padding-bottom: 5pt;
+    }
+
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10pt;
+    }
+
+    .experience-header {
+        margin-bottom: 5pt;
+    }
+
+    ul {
+        margin-top: 5pt;
+        padding-left: 20pt;
+    }
+
+    li {
+        margin-bottom: 3pt;
+    }
+
+    a {
+        text-decoration: none;
+        color: var(--primary-color);
+    }
+
+    .contact-info {
+        margin-bottom: 15pt;
+    }
+}
