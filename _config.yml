@@ -2,9 +2,14 @@ title: Jeffrey Williams - Software Engineer
 description: Software Engineer Portfolio and Resume
 url: https://jwill824.github.io
 baseurl: /resume
+
 markdown: kramdown
 plugins:
   - jekyll-seo-tag
+
+sass:
+  sass_dir: _sass
+  style: compressed
 
 exclude:
   - README.md
