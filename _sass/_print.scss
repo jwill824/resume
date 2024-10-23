@@ -1,56 +1,78 @@
 @media print {
-    body {
+    @page {
+        size: A4;
+        margin: 20mm;
+    }
+
+    html, body {
+        width: 210mm;
+        height: 297mm;
         background-color: white !important;
-        font-size: 12pt;
+        font-size: 11pt;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
     }
 
     .container {
-        max-width: none;
-        margin: 0;
-        padding: 20px;
-        box-shadow: none;
+        width: 100%;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
     }
 
     .download-container {
-        display: none;
+        display: none !important;
     }
 
     h1 {
-        font-size: 24pt;
-        margin-bottom: 10pt;
+        font-size: 18pt;
+        margin-bottom: 8pt;
     }
 
     h2 {
-        font-size: 18pt;
-        margin-top: 15pt;
-        padding-bottom: 5pt;
+        font-size: 14pt;
+        margin-top: 12pt;
+        padding-bottom: 4pt;
+        break-after: avoid;
     }
 
     .skills-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 10pt;
+        gap: 8pt;
+        break-inside: avoid;
+    }
+
+    .experience-item {
+        break-inside: avoid;
+        margin-bottom: 12pt;
     }
 
     .experience-header {
-        margin-bottom: 5pt;
+        margin-bottom: 4pt;
     }
 
     ul {
-        margin-top: 5pt;
-        padding-left: 20pt;
+        margin-top: 4pt;
+        padding-left: 16pt;
     }
 
     li {
-        margin-bottom: 3pt;
+        margin-bottom: 2pt;
     }
 
     a {
         text-decoration: none;
-        color: var(--primary-color);
+        color: var(--primary-color) !important;
     }
 
     .contact-info {
-        margin-bottom: 15pt;
+        margin-bottom: 12pt;
+    }
+
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
     }
 }

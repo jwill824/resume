@@ -56,52 +56,79 @@ jobs:
       # Generate PDF from the built Jekyll site
       - name: Generate PDF
         run: |
-          cat << 'EOF' > generate-pdf.js
-          const puppeteer = require('puppeteer');
-          const fs = require('fs');
-          
-          (async () => {
-            const browser = await puppeteer.launch({
-              headless: "new",
-              args: ['--no-sandbox', '--disable-setuid-sandbox']
-            });
-            const page = await browser.newPage();
+            cat << 'EOF' > generate-pdf.js
+            const puppeteer = require('puppeteer');
+            const fs = require('fs');
             
-            // Wait for styles to load
-            await page.goto(`file:${process.cwd()}/_site/index.html`, {
-              waitUntil: 'networkidle0'
-            });
+            (async () => {
+                try {
+                const browser = await puppeteer.launch({
+                    headless: "new",
+                    args: ['--no-sandbox', '--disable-setuid-sandbox']
+                });
+                
+                const page = await browser.newPage();
+                
+                // Set viewport first
+                await page.setViewport({
+                    width: 1200,
+                    height: 800
+                });
 
-            // Inject styles directly for PDF generation
-            await page.addStyleTag({
-              path: '_site/assets/css/styles.css'
-            });
+                // Read the CSS file content
+                const cssContent = fs.readFileSync('_site/assets/css/styles.css', 'utf8');
+                
+                // Navigate to the HTML file
+                await page.goto(`file:${process.cwd()}/_site/index.html`, {
+                    waitUntil: ['networkidle0', 'domcontentloaded']
+                });
 
-            // Set viewport for better PDF rendering
-            await page.setViewport({
-              width: 1200,
-              height: 800
-            });
+                // Inject styles directly into the page
+                await page.addStyleTag({ content: cssContent });
 
-            // Wait for any animations/transitions
-            await page.waitForTimeout(1000);
-            
-            await page.pdf({
-              path: '_site/resume.pdf',
-              format: 'A4',
-              margin: {
-                top: '20px',
-                right: '20px',
-                bottom: '20px',
-                left: '20px'
-              },
-              printBackground: true  // Important for background colors
-            });
-            
-            await browser.close();
-          })();
-          EOF
-          node generate-pdf.js
+                // Use evaluate to ensure everything is loaded
+                await page.evaluate(() => {
+                    return new Promise((resolve) => {
+                    // Wait for images and fonts to load
+                    if (document.readyState === 'complete') {
+                        resolve();
+                    } else {
+                        window.addEventListener('load', resolve);
+                    }
+                    });
+                });
+
+                // Generate PDF with proper settings
+                await page.pdf({
+                    path: '_site/resume.pdf',
+                    format: 'A4',
+                    margin: {
+                    top: '20px',
+                    right: '20px',
+                    bottom: '20px',
+                    left: '20px'
+                    },
+                    printBackground: true,
+                    preferCSSPageSize: true
+                });
+
+                await browser.close();
+                console.log('PDF generated successfully');
+                } catch (error) {
+                console.error('Error generating PDF:', error);
+                process.exit(1);
+                }
+            })();
+            EOF
+            node generate-pdf.js
+
+      - name: Verify PDF Generation
+        run: |
+            if [ ! -f "_site/resume.pdf" ]; then
+                echo "PDF was not generated!"
+                exit 1
+            fi
+            echo "PDF was generated successfully"
 
       # Validate HTML (using the Jekyll-built files)
       - name: Validate HTML
