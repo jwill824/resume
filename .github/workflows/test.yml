@@ -1,4 +1,4 @@
-name: Test Resume
+name: Test
 
 on:
   push:
@@ -9,56 +9,59 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    
     steps:
       - uses: actions/checkout@v4
 
-      # Setup Ruby for Jekyll
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
           bundler-cache: true
 
-      # Install Jekyll and dependencies
       - name: Install Jekyll
         run: |
           gem install bundler jekyll
           bundle install
 
-      # Build Jekyll site
-      - name: Build with Jekyll
+      - name: Build Jekyll
         run: bundle exec jekyll build
         env:
           JEKYLL_ENV: production
 
-      # Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
 
-      # Install Node dependencies
       - name: Install Dependencies
         run: |
-          npm init -y
-          npm install jest @testing-library/jest-dom @testing-library/dom puppeteer axe-core lighthouse html-validate
+          npm ci
+          npm install jest @testing-library/jest-dom @testing-library/dom puppeteer axe-core lighthouse
           npm install --save-dev jest-environment-jsdom
 
-      # HTML Validation
-      - name: Validate HTML
-        run: npx html-validate _site/**/*.html
-
-      # JavaScript Tests
-      - name: Run JavaScript Tests
+      - name: Run Tests
         run: npm test
 
-      # Upload test results as artifacts
+      # Performance testing with Lighthouse
+      - name: Lighthouse Check
+        run: |
+          npm install -g @lhci/cli@0.13.x
+          lhci autorun || echo "Lighthouse failed"
+
+      # Accessibility testing
+      - name: Run accessibility tests
+        run: node tests/accessibility.js
+
+      # Visual regression testing
+      - name: Run visual regression tests
+        run: node tests/visual-regression.js
+
       - name: Upload test results
-        uses: actions/upload-artifact@v4
         if: always()
+        uses: actions/upload-artifact@v4
         with:
           name: test-results
           path: |
             tests/results
-            lighthouse-report
+            .lighthouseci

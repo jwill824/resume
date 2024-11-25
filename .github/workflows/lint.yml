@@ -1,0 +1,61 @@
+name: Lint
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Install Ruby linters
+        run: |
+          gem install bundler
+          gem install rubocop
+          gem install jekyll-lint
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Node.js linters
+        run: |
+          npm install -g markdownlint-cli
+          npm install -g eslint
+          npm install -g prettier
+          npm install -g yaml-lint
+          npm install -g sass-lint
+
+      - name: Lint Ruby
+        run: |
+          rubocop .
+          jekyll-lint
+
+      - name: Lint JavaScript
+        run: |
+          eslint ./assets/js/**/*.js
+          prettier --check .
+
+      - name: Lint Markdown
+        run: markdownlint '**/*.md'
+
+      - name: Lint YAML
+        run: yamllint .
+
+      - name: Lint SCSS
+        run: sass-lint -v -q
+
+      - name: Validate HTML
+        run: npx html-validate _site/**/*.html
