@@ -1,19 +1,34 @@
-title: Jeffrey Williams - Software Engineer
-description: Software Engineer Portfolio and Resume
-url: https://jwill824.github.io
+# Site settings
+title: Jeff Williams | Software Engineer
+description: Professional resume and portfolio of Jeffrey Williams
 baseurl: /resume
+url: https://jwill824.github.io
 
+# Build settings
 markdown: kramdown
-plugins:
-  - jekyll-seo-tag
 
+# Sass/SCSS
 sass:
   sass_dir: _sass
   style: compressed
+  implementation: sass-embedded
 
+# Plugins
+plugins:
+  - jekyll-seo-tag
+
+# Exclude from processing
 exclude:
-  - README.md
   - Gemfile
   - Gemfile.lock
   - node_modules
   - vendor
+  - .git
+  - .github
+  - LICENSE
+  - README.md
+  - jest.config.js
+  - package.json
+  - package-lock.json
+  - tests
+  - scripts

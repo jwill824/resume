@@ -1,18 +1,41 @@
+@use 'sass:math';
+@use 'sass:color';
+
+// Print-specific variables
+$print-font-body: 11pt;
+$print-font-h1: 18pt;
+$print-font-h2: 14pt;
+$print-margin: 20mm;
+$print-spacing-sm: 4pt;
+$print-spacing-md: 8pt;
+$print-spacing-lg: 12pt;
+$print-spacing-xl: 16pt;
+$print-text-dark: #333;
+
 @media print {
+
+    // Page setup
     @page {
         size: A4;
-        margin: 20mm;
+        margin: $print-margin;
     }
 
-    html, body {
-        width: 210mm;
-        height: 297mm;
-        background-color: white !important;
-        font-size: 11pt;
+    // Global print adjustments
+    * {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
 
+    // Basic document setup
+    html,
+    body {
+        width: 210mm;
+        height: 297mm;
+        background-color: white !important;
+        font-size: $print-font-body;
+    }
+
+    // Container adjustments
     .container {
         width: 100%;
         max-width: none !important;
@@ -21,58 +44,79 @@
         box-shadow: none !important;
     }
 
-    .download-container {
-        display: none !important;
+    // Header styles
+    header {
+        .download-container {
+            display: none !important;
+        }
+
+        h1 {
+            font-size: $print-font-h1;
+            margin-bottom: $print-spacing-md;
+        }
+
+        .contact-info {
+            margin-bottom: $print-spacing-lg;
+        }
     }
 
-    h1 {
-        font-size: 18pt;
-        margin-bottom: 8pt;
-    }
-
+    // Section headings
     h2 {
-        font-size: 14pt;
-        margin-top: 12pt;
-        padding-bottom: 4pt;
+        font-size: $print-font-h2;
+        margin-top: $print-spacing-lg;
+        padding-bottom: $print-spacing-sm;
         break-after: avoid;
     }
 
+    // Skills section
     .skills-grid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8pt;
+        grid-template-columns: repeat(2, math.div(100%, 2));
+        gap: $print-spacing-md;
         break-inside: avoid;
+
+        .skill-category {
+            break-inside: avoid;
+        }
+
+        .years {
+            color: color.adjust($print-text-dark, $lightness: 20%) !important;
+        }
     }
 
+    // Experience section
     .experience-item {
         break-inside: avoid;
-        margin-bottom: 12pt;
+        margin-bottom: $print-spacing-lg;
+
+        .experience-header {
+            margin-bottom: $print-spacing-sm;
+        }
+
+        ul {
+            margin-top: $print-spacing-sm;
+            padding-left: $print-spacing-xl;
+
+            li {
+                margin-bottom: $print-spacing-sm;
+                break-inside: avoid;
+            }
+        }
     }
 
-    .experience-header {
-        margin-bottom: 4pt;
-    }
-
-    ul {
-        margin-top: 4pt;
-        padding-left: 16pt;
-    }
-
-    li {
-        margin-bottom: 2pt;
-    }
-
+    // Links
     a {
         text-decoration: none;
-        color: var(--primary-color) !important;
+        color: $print-text-dark !important;
     }
 
-    .contact-info {
-        margin-bottom: 12pt;
-    }
-
-    * {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
+    // Page break controls
+    #summary,
+    #skills,
+    #experience,
+    #education,
+    #certifications,
+    #projects {
+        break-inside: avoid-start;
     }
 }

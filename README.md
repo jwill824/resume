@@ -1,17 +1,21 @@
 # Personal Resume Site
 
-A Jekyll-based resume website with automated PDF generation and GitHub Pages deployment.
+A Jekyll-based resume website with automated PDF generation, dynamic skill years calculation, comprehensive testing, and GitHub Pages deployment.
 
 ## 🎯 Overview
 
 This repository contains my professional resume, built using Jekyll and automatically deployed to GitHub Pages. It features:
+
 - Responsive design with SCSS
+- Dynamic calculation of years of experience for skills
 - Automated PDF generation with proper styling
 - Version-controlled content in YAML format
+- Comprehensive test suite
 - Automated builds and deployments
 - Print-optimized styling
 
 ## 🏗️ Repository Structure
+
 ```
 resume/
 ├── .github/
@@ -25,20 +29,33 @@ resume/
 │   ├── _resume.scss         # Main styles
 │   └── _print.scss          # Print-specific styles
 ├── assets/
-│   └── css/
-│       └── styles.scss      # Main SCSS importer
+│   ├── css/
+│   │   └── styles.scss      # Main SCSS importer
+│   └── js/
+│       └── skills.js        # Skills experience calculator
+├── tests/
+│   ├── accessibility.js     # Accessibility testing
+│   ├── performance.js       # Performance testing
+│   ├── skills.test.js      # Unit tests for skills calculation
+│   └── visual-regression.js # Visual regression testing
+├── scripts/
+│   └── test-setup.js       # Test environment setup
 ├── .htmlvalidate.json       # HTML validation config
 ├── .gitignore
 ├── _config.yml             # Jekyll configuration
 ├── Gemfile                 # Ruby dependencies
+├── jest.config.js          # Jest configuration
+├── package.json            # Node.js dependencies
 ├── index.html              # Main template with Liquid tags
-└── README.md              # This file
+└── README.md               # This file
 ```
 
 ## 📝 Content Structure
 
 ### YAML Data Format
+
 Content is stored in `_data/resume.yml` with the following structure:
+
 ```yaml
 contact:
   name: "Your Name"
@@ -63,154 +80,264 @@ certifications:
   - title: "Certification Name"
 ```
 
+### Dynamic Skills Experience
+
+The site automatically calculates years of experience for skills based on work history:
+
+- Parses dates from experience entries
+- Matches skills mentioned in achievements
+- Displays year count next to each skill
+- Updates automatically as experience grows
+
 ### Styling Structure
+
 The site uses SCSS with Jekyll's built-in SASS processing:
-- `_sass/_resume.scss`: Main styles
+
+- `_sass/_resume.scss`: Main styles with responsive design
 - `_sass/_print.scss`: Print/PDF-specific styles
 - `assets/css/styles.scss`: Import file with front matter
 
-## 🚀 Deployment Workflow
+## 🧪 Testing Infrastructure
 
-### Automated Deployment
-The site automatically deploys when:
-- Changes are pushed to the `main` branch
-- Pull requests are created
-- Manually triggered via GitHub Actions
+### Test Suites
 
-The workflow (`deploy.yml`) performs these steps:
-1. Sets up Ruby and Jekyll
-2. Builds the Jekyll site
-3. Processes SCSS to CSS
-4. Generates a PDF version with proper styling
-5. Validates HTML
-6. Deploys to GitHub Pages
-7. Creates GitHub release (if tagged)
+1. **Unit Tests** (Jest)
+   - Skills experience calculation
+   - Date parsing and formatting
+   - Edge case handling
 
-### PDF Generation
-PDF generation includes:
-- Proper styling and formatting
-- Print-specific styles
-- Background colors and images
-- Responsive layout adjustments
+   ```bash
+   npm run test:unit
+   ```
 
-### HTML Validation
-Validates against:
-- HTML5 standards
-- Proper character encoding
-- No trailing whitespace
-- Correct meta tags
+2. **Accessibility Testing** (Playwright + axe-core)
+   - WCAG compliance checking
+   - Screen reader compatibility
+   - Keyboard navigation
+   - Generates detailed reports in Markdown and JSON
 
-## 🛠️ Local Development
+   ```bash
+   npm run test:accessibility
+   ```
 
-### Initial Setup
+3. **Visual Regression Testing** (Playwright)
+   - Screenshot comparison
+   - Layout consistency
+   - Responsive design verification
+   - Cross-platform compatibility
+   - Generates diff images for review
 
-1. Install Ruby dependencies:
+   ```bash
+   npm run test:visual
+   ```
+
+4. **Performance Testing** (Playwright + Lighthouse)
+   - Performance scores
+   - Accessibility scores
+   - Best practices verification
+   - SEO optimization
+   - Generates HTML and JSON reports
+
+   ```bash
+   npm run test:performance
+   ```
+
+### Test Reports
+
+All test results are saved in the `tests/results` directory:
+
+- `accessibility.json` - Detailed accessibility violations
+- `accessibility-summary.md` - Human-readable accessibility report
+- `lighthouse-results.json` - Full Lighthouse data
+- `lighthouse-report.html` - Interactive Lighthouse report
+- `performance-summary.md` - Key performance metrics
+- Visual regression images:
+  - `baseline.png` - Reference screenshot
+  - `current.png` - Latest test screenshot
+  - `diff.png` - Visual differences highlighted
+
+### Running Tests
+
 ```bash
-# Install Ruby (if needed)
-brew install ruby    # macOS
-sudo apt install ruby-full  # Ubuntu
+# Run all tests
+npm test
 
-# Install bundler and dependencies
-gem install bundler
+# Run individual test suites
+npm run test:unit
+npm run test:accessibility
+npm run test:visual
+npm run test:performance
+
+# Watch mode for development
+npm run test:watch
+```
+
+### Test Configuration
+
+- Accessibility tests validate against WCAG 2.1 standards
+- Performance threshold set to 90 for all Lighthouse categories
+- Visual regression allows 1% pixel difference threshold
+- Unit tests run with Jest in jsdom environment
+
+### Common Testing Tasks
+
+1. **Update Visual Baseline**
+
+   ```bash
+   rm tests/baseline.png
+   npm run test:visual
+   ```
+
+2. **Review Test Reports**
+
+   ```bash
+   # Open test results in browser
+   open tests/results/lighthouse-report.html
+   # View accessibility summary
+   cat tests/results/accessibility-summary.md
+   ```
+
+3. **Debug Visual Differences**
+
+   ```bash
+   # Check diff image
+   open tests/results/diff.png
+   ```
+
+## 🚀 Development Setup
+
+### Using Dev Container (Recommended)
+
+This project includes a dev container configuration for VS Code that sets up all necessary dependencies automatically. To use it:
+
+1. Install [VS Code](https://code.visualstudio.com/) and the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+2. Clone this repository
+3. Open in VS Code and click "Reopen in Container" when prompted
+4. The container will automatically install all dependencies:
+   - Ruby and Jekyll
+   - Node.js and npm packages
+   - Playwright for testing
+   - System dependencies for visual testing
+   - All project-specific dependencies
+
+### Manual Setup
+
+If not using the dev container, you'll need to install dependencies manually:
+
+1. Install Ruby and development tools:
+
+```bash
+# Ubuntu/Debian
+sudo apt-get update
+sudo apt-get install ruby-full build-essential zlib1g-dev
+
+# Add Ruby paths to your shell
+echo 'export GEM_HOME="$HOME/gems"' >> ~/.bashrc
+echo 'export PATH="$HOME/gems/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+2. Install Jekyll and Bundler:
+
+```bash
+gem install jekyll bundler
+```
+
+3. Install system dependencies for testing:
+
+```bash
+sudo apt-get install -y \
+    libgbm-dev \
+    libatk1.0-0 \
+    libatk-bridge2.0-0 \
+    libcups2 \
+    libdrm2 \
+    libxkbcommon0 \
+    libxcomposite1 \
+    libxdamage1 \
+    libxfixes3 \
+    libxrandr2 \
+    libgbm1 \
+    libasound2
+```
+
+4. Install project dependencies:
+
+```bash
+# Ruby dependencies
 bundle install
+
+# Node.js dependencies
+npm install
+
+# Playwright browser
+npx playwright install chromium
 ```
 
-2. Install Node.js dependencies (for PDF generation):
-```bash
-npm init -y
-npm install puppeteer html-validate
-```
+### Local Development
 
-### Local Testing
 ```bash
 # Start Jekyll server
 bundle exec jekyll serve
 
-# Build site without serving
+# Build site
 bundle exec jekyll build
 
-# Validate HTML
-npx html-validate _site/index.html
-```
-
-## 📝 Making Updates
-
-### Content Updates
-1. Edit `_data/resume.yml` to update:
-   - Contact information
-   - Work experience
-   - Skills
-   - Education
-   - Certifications (using proper title format)
-   - Projects
-
-2. Commit and push changes:
-```bash
-git add _data/resume.yml
-git commit -m "Update resume content"
-git push origin main
-```
-
-### Style Updates
-1. Modify SCSS files:
-   - Main styles in `_sass/_resume.scss`
-   - Print styles in `_sass/_print.scss`
-2. Test locally using `bundle exec jekyll serve`
-3. Check PDF output in browser print preview
-
-### Creating Releases
-```bash
-# Create and tag a new version
-git tag -a v1.0.0 -m "Version 1.0.0 - Initial release"
-git push origin v1.0.0
+# Run tests in watch mode
+npm run test:watch
 ```
 
 ## 🔍 Troubleshooting
 
 ### Common Issues
 
-1. **Styles Not Applying to PDF**
-   - Check print styles in `_sass/_print.scss`
-   - Verify CSS compilation in `_site/assets/css/`
-   - Check PDF generation logs in GitHub Actions
+1. **Test Environment Setup**
+   - If using devcontainer, try rebuilding the container
+   - Ensure Ruby and Node.js are installed
+   - Check all dependencies are installed
+   - Verify Jekyll site builds correctly
 
-2. **SCSS Not Compiling**
-   - Verify front matter (--- ---) in `styles.scss`
-   - Check `_config.yml` SASS settings
-   - Verify file locations in `_sass` directory
+2. **Visual Regression Testing**
+   - First run creates baseline
+   - Subsequent runs compare against baseline
+   - Check `tests/results` for diff images
 
-3. **HTML Validation Errors**
-   - Check `.htmlvalidate.json` configuration
-   - Verify proper character encoding in templates
-   - Remove trailing whitespace
+3. **Accessibility Testing**
+   - Review violations in test output
+   - Check WCAG compliance levels
+   - Verify aria labels and roles
 
-4. **Certification Format Issues**
-   - Use proper YAML structure with `title` key
-   - Check for proper indentation
-   - Verify Liquid template syntax
+4. **Performance Testing**
+   - Monitor Lighthouse scores
+   - Check for performance regressions
+   - Optimize assets if needed
 
 ## 🔄 Maintenance
 
 ### Regular Tasks
+
 1. Update content monthly/quarterly
-2. Review and update dependencies
-3. Check PDF rendering
-4. Validate HTML structure
-5. Test responsive design
+2. Run full test suite after updates
+3. Review and update dependencies
+4. Check visual regression baselines
+5. Monitor accessibility compliance
 6. Verify print layout
+7. Update years of experience calculations
 
 ### Security
+
 - Keep Jekyll up to date
 - Review GitHub security alerts
-- Update dependencies regularly
+- Update Node.js dependencies
+- Monitor test results for regressions
 
 ## 📚 Additional Resources
 
 - [Jekyll Documentation](https://jekyllrb.com/docs/)
-- [GitHub Pages Documentation](https://docs.github.com/en/pages)
-- [Liquid Template Guide](https://shopify.github.io/liquid/)
-- [SCSS Documentation](https://sass-lang.com/documentation)
-- [Puppeteer Documentation](https://pptr.dev/)
+- [Jest Testing Framework](https://jestjs.io/)
+- [Playwright Documentation](https://playwright.dev/)
+- [axe-core Accessibility Testing](https://github.com/dequelabs/axe-core)
+- [Lighthouse Documentation](https://developers.google.com/web/tools/lighthouse/)
 
 ## 📄 License
 

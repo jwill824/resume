@@ -1,25 +1,14 @@
 ---
 layout: default
 ---
-<header>
-    <h1>{{ site.data.resume.contact.name }}</h1>
-    <div class="contact-info">
-        {{ site.data.resume.contact.title }} | {{ site.data.resume.contact.location }}<br>
-        <a href="mailto:{{ site.data.resume.contact.email }}">{{ site.data.resume.contact.email }}</a> |
-        <a href="https://www.linkedin.com/in/{{ site.data.resume.contact.linkedin }}">LinkedIn</a>
-    </div>
-    <div class="download-container">
-        <a href="resume.pdf" class="download-button" download>Download Resume (PDF)</a>
-    </div>
-</header>
 
-<section id="summary">
-    <h2>Professional Summary</h2>
+<section id="summary" aria-labelledby="summary-title">
+    <h2 id="summary-title">Professional Summary</h2>
     <p>{{ site.data.resume.summary }}</p>
 </section>
 
-<section id="skills">
-    <h2>Skills</h2>
+<section id="skills" aria-labelledby="skills-title">
+    <h2 id="skills-title">Skills</h2>
     <div class="skills-grid">
         {% for skill in site.data.resume.skills %}
         <div class="skill-category">
@@ -29,8 +18,10 @@ layout: default
     </div>
 </section>
 
-<section id="experience">
-    <h2>Professional Experience</h2>
+<script id="experience-data" type="application/json">{{site.data.resume.experience | jsonify}}</script>
+
+<section id="experience" aria-labelledby="experience-title">
+    <h2 id="experience-title">Professional Experience</h2>
     {% for job in site.data.resume.experience %}
     <div class="experience-item">
         <div class="experience-header">
@@ -40,14 +31,14 @@ layout: default
         <ul>
             {% for achievement in job.achievements %}
             <li>{{ achievement | replace: '>', '&gt;' | replace: '<', '&lt;' }}</li>
-            {% endfor %}
+                    {% endfor %}
         </ul>
     </div>
     {% endfor %}
 </section>
 
-<section id="education">
-    <h2>Education</h2>
+<section id="education" aria-labelledby="education-title">
+    <h2 id="education-title">Education</h2>
     {% for edu in site.data.resume.education %}
     <div class="experience-item">
         <div class="experience-header">
@@ -59,8 +50,8 @@ layout: default
     {% endfor %}
 </section>
 
-<section id="certifications">
-    <h2>Certifications &amp; Professional Development</h2>
+<section id="certifications" aria-labelledby="certifications-title">
+    <h2 id="certifications-title">Certifications &amp; Professional Development</h2>
     <ul>
         {% for cert in site.data.resume.certifications %}
         <li>{{ cert.title }}</li>
@@ -68,8 +59,8 @@ layout: default
     </ul>
 </section>
 
-<section id="projects">
-    <h2>Side Projects</h2>
+<section id="projects" aria-labelledby="projects-title">
+    <h2 id="projects-title">Side Projects</h2>
     <ul>
         {% for project in site.data.resume.projects %}
         <li>{{ project }}</li>

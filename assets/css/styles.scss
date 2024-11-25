@@ -1,5 +1,7 @@
 ---
 ---
 
-@import "resume";
-@import "print";
+@use 'sass:math';
+@use 'sass:color';
+@forward 'resume';
+@forward 'print';

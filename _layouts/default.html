@@ -1,16 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jeff Williams | Software Engineer</title>
-    <meta name="description" content="Professional resume and portfolio of Jeffrey Williams, Software Engineer">
+    <meta name="description" content="Professional resume and portfolio of Jeffrey Williams">
     <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+    <script src="{{ '/assets/js/skills.js' | relative_url }}" type="module"></script>
     {% seo title=false %}
 </head>
+
 <body>
     <div class="container">
-        {{ content }}
+        <header role="banner">
+            <h1>{{ site.data.resume.contact.name }}</h1>
+            <div class="contact-info">
+                {{ site.data.resume.contact.title }} | {{ site.data.resume.contact.location }}<br>
+                <a href="mailto:{{ site.data.resume.contact.email }}">{{ site.data.resume.contact.email }}</a> |
+                <a href="https://www.linkedin.com/in/{{ site.data.resume.contact.linkedin }}">LinkedIn</a>
+            </div>
+            <div class="download-container">
+                <a href="resume.pdf" class="download-button" download>Download Resume (PDF)</a>
+            </div>
+        </header>
+
+        <main role="main">
+            {{ content }}
+        </main>
+
+        <footer role="contentinfo">
+            <p class="print-only">Last updated: {{ site.time | date: '%B %Y' }}</p>
+        </footer>
     </div>
 </body>
+
 </html>

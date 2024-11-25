@@ -1,0 +1,64 @@
+name: Test Resume
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+
+      # Setup Ruby for Jekyll
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      # Install Jekyll and dependencies
+      - name: Install Jekyll
+        run: |
+          gem install bundler jekyll
+          bundle install
+
+      # Build Jekyll site
+      - name: Build with Jekyll
+        run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production
+
+      # Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Install Node dependencies
+      - name: Install Dependencies
+        run: |
+          npm init -y
+          npm install jest @testing-library/jest-dom @testing-library/dom puppeteer axe-core lighthouse html-validate
+          npm install --save-dev jest-environment-jsdom
+
+      # HTML Validation
+      - name: Validate HTML
+        run: npx html-validate _site/**/*.html
+
+      # JavaScript Tests
+      - name: Run JavaScript Tests
+        run: npm test
+
+      # Upload test results as artifacts
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: |
+            tests/results
+            lighthouse-report
