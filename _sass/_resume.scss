@@ -1,15 +1,15 @@
 @use 'sass:math';
 @use 'sass:color';
 
-// SASS Variables
-$primary-color: #2c3e50;
-$secondary-color: #3498db;
-$background-color: #f9f9f9;
-$text-color: #333;
-$border-color: #ddd;
-$light-text: color.adjust($text-color, $lightness: 20%);
+// SASS Variables  
+$primary-color: #1a365d; // Darker blue for better contrast
+$secondary-color: #2b6cb0; // Professional blue
+$background-color: #ffffff;
+$text-color: #2d3748;
+$border-color: #e2e8f0;
+$light-text: #4a5568;
 
-// CSS Variables (for dynamic values)
+// CSS Variables
 :root {
     --primary-color: #{$primary-color};
     --secondary-color: #{$secondary-color};
@@ -18,138 +18,150 @@ $light-text: color.adjust($text-color, $lightness: 20%);
     --border-color: #{$border-color};
 }
 
-// Mixins
-@mixin transition($property: all, $duration: 0.3s) {
-    transition: $property $duration ease-in-out;
-}
-
-@mixin box-shadow($opacity: 0.1) {
-    box-shadow: 0 0 10px color.adjust(#000, $alpha: -$opacity);
-}
-
 // Base styles
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    line-height: 1.5;
     margin: 0;
-    padding: 0;
+    padding: 2rem 1rem;
     background-color: var(--background-color);
     color: var(--text-color);
 }
 
 .container {
-    max-width: 900px;
+    max-width: 800px;
     margin: 0 auto;
-    padding: math.div(2rem, 1);
     background-color: white;
-    @include box-shadow(0.1);
+    padding: 2rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 // Header styles
 header {
-    text-align: center;
-    margin-bottom: math.div(2rem, 1);
-    position: relative;
+    text-align: left;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid $border-color;
 }
 
 h1 {
     color: $primary-color;
-    margin-bottom: 0.5rem;
-}
-
-h2 {
-    color: $primary-color;
-    border-bottom: 2px solid $secondary-color;
-    padding-bottom: 0.5rem;
-    margin-top: math.div(2rem, 1);
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
 }
 
 .contact-info {
     color: $light-text;
-    margin-bottom: 1rem;
+    font-size: 0.95rem;
+
+    a {
+        color: $secondary-color;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
 
-// Skills section
-.skills-grid {
-    .skill-category {
-        margin-bottom: 1rem;
+// Section styles
+section {
+    margin-bottom: 2rem;
+}
 
+h2 {
+    color: $primary-color;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 1.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid $secondary-color;
+}
+
+// Skills grid
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+
+    .skill-category {
         strong {
             color: $primary-color;
-        }
-
-        .skill {
-            display: inline-block;
-            margin-right: 0.5rem;
-
-            .years {
-                font-size: math.div(0.8em, 1);
-                color: $light-text;
-                font-weight: normal;
-            }
+            font-weight: 600;
         }
     }
 }
 
 // Experience section
 .experience-item {
-    margin-bottom: math.div(2rem, 1);
-}
+    margin-bottom: 1.5rem;
 
-.experience-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
-    flex-wrap: wrap;
-}
+    .experience-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 0.5rem;
 
-.company {
-    font-weight: bold;
-    color: $primary-color;
-}
+        .company {
+            font-weight: 600;
+            color: $primary-color;
+        }
 
-.date {
-    color: $light-text;
-}
+        .date {
+            color: $light-text;
+            font-size: 0.9rem;
+        }
+    }
 
-// List styles
-ul {
-    margin-top: 0.5rem;
-    padding-left: 1.5rem;
-}
+    ul {
+        margin: 0.5rem 0;
+        padding-left: 1.25rem;
 
-li {
-    margin-bottom: 0.5rem;
-}
-
-// Download button
-.download-button {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background-color: $secondary-color;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    @include transition(background-color);
-    margin-top: 1rem;
-
-    &:hover {
-        background-color: color.adjust($secondary-color, $lightness: -10%);
+        li {
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
     }
 }
 
-.download-container {
-    text-align: center;
-    margin-bottom: math.div(2rem, 1);
+// Print styles
+@media print {
+    body {
+        padding: 0;
+        background: none;
+    }
+
+    .container {
+        max-width: none;
+        padding: 0;
+        box-shadow: none;
+    }
+
+    .download-container {
+        display: none;
+    }
+
+    a {
+        text-decoration: none;
+        color: $text-color;
+    }
 }
 
-// Media queries
+// Responsive styles
 @media (max-width: 600px) {
+    .container {
+        padding: 1rem;
+    }
+
     .experience-header {
         flex-direction: column;
+        gap: 0.25rem;
     }
 
-    .date {
-        margin-top: 0.25rem;
+    .skills-grid {
+        grid-template-columns: 1fr;
     }
 }
