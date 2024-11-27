@@ -26,8 +26,6 @@ async function runPerformanceTests() {
             throw new Error('Site has not been built properly - index.html not found');
         }
 
-        // Instead of using Lighthouse (which requires a server),
-        // let's measure key performance metrics directly
         await page.goto('file://' + indexPath);
 
         // Collect performance metrics

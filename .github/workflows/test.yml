@@ -2,9 +2,7 @@ name: Test
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   test:
@@ -43,17 +41,28 @@ jobs:
       - name: Run Tests
         run: npm test
 
-      # Performance testing with Lighthouse
-      - name: Lighthouse Check
+      - name: Custom Performance Tests
+        run: node tests/performance.js
+
+      - name: Lighthouse CI
         run: |
           npm install -g @lhci/cli@0.13.x
-          lhci autorun || echo "Lighthouse failed"
+          lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            
+      - name: Add Lighthouse Status Check
+        if: github.event_name == 'pull_request'
+        run: |
+          score=$(cat .lighthouseci/manifest.json | jq -r '.[] | .summary.performance')
+          if (( $(echo "$score < 0.9" | bc -l) )); then
+            echo "Performance score below threshold: $score"
+            exit 1
+          fi
 
-      # Accessibility testing
       - name: Run accessibility tests
         run: node tests/accessibility.js
 
-      # Visual regression testing
       - name: Run visual regression tests
         run: node tests/visual-regression.js
 
