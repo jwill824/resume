@@ -7,82 +7,82 @@ contact:
   github: jwill824
 
 summary: >
-  Versatile Software Engineer with extensive experience in developing and optimizing enterprise-level applications. 
-  Proven track record of delivering scalable solutions with 20-40% performance improvements.
-  Expertise in cloud technologies, CI/CD automation, and microservices architecture with a focus on .NET and Java ecosystems.
+  Senior Software Engineer with extensive experience in .NET and Java enterprise applications development, including financial and insurance systems.
+  Proven track record of delivering secure, scalable solutions with demonstrated 20-50% performance improvements.
+  Expert in developing maintainable software with comprehensive testing practices and a strong focus on security compliance and operational excellence.
 
 skills:
   - category: Core Technologies
-    items: C# (.NET Core), Java (Spring Boot), JavaScript/TypeScript, Python
+    items: C# (ASP/.NET Core), Java (Spring Boot), JavaScript/TypeScript, Python
+
+  - category: Security & Protocols
+    items: OAuth 2.0, SAML, SSL/TLS, HIPAA Compliance, Data Encryption, Audit Logging
+
   - category: Cloud & Infrastructure  
-    items: AWS (Console, CLI), Azure (DevOps), OpenShift, Kubernetes, Docker, Terraform, Packer
+    items: Azure DevOps (Console, CLI), AWS (Console, CLI), OpenShift, Kubernetes, Docker, Terraform, VM Management
+
   - category: CI/CD & DevOps
-    items: GitHub Actions, Jenkins, Azure DevOps, SonarQube, Dynatrace, OpenSearch
-  - category: Databases & Integration
-    items: MS SQL Server, Oracle, MySQL, PostgreSQL, REST, SOAP, ESB, HL7, Epic Interconnect, GraphQL
+    items: GitHub Actions, Jenkins, Azure DevOps, SonarQube, Dynatrace, OpenSearch, Canary Deployments
+
+  - category: Integration & Messaging
+    items: REST APIs, SOAP, GraphQL, RPC, Message Queues, Event-Driven Architecture
+
   - category: Web Technologies
-    items: ASP.NET Core, Blazor WASM, Angular, React, HTML, CSS, Bootstrap
+    items: Blazor WASM, ASP.NET Core, Angular, React, HTML/CSS, Bootstrap
+
   - category: Architecture
-    items: Microservices, Event-driven Architecture, SOLID, ACID
-  - category: Data & ORM
-    items: Entity Framework, LINQ, Hibernate, JPA, JDBC
-  - category: Testing
-    items: JUnit, xUnit, BUnit, Karate, Cucumber, Postman, testcontainers
+    items: Microservices, Event-driven Architecture, SOLID Principles, ACID Compliance
+
+  - category: Data & Testing
+    items: Entity Framework, LINQ, xUnit, BUnit, JUnit, Karate, Postman
+
   - category: Tools & Methodologies
-    items: Git, Agile, Scrum, Jira, Confluence, TDD, BDD, Pair Programming, Rubber Duck Debugging
+    items: Git, Agile/Scrum, Jira, TDD, BDD, Pair Programming
 
 experience:
   - company: Leading EDJE
     client: Crown Equipment
+    role: DevOps Engineer
     date: May 2024 - Present
     achievements:
-      - "Helped lead a large-scale lift-and-shift migration of 180+ production repositories from On-Prem Bamboo to GitHub Actions, reducing production build times in half and thus reducing release capacity costs"
-      - "Dealt with high pressure and tight deadlines during the migration project, keeping the team focused and on track to meet the deadline"
-      - "First time working as a devops engineer, learned and implemented GitHub Actions, Terraform, AWS, and Docker in 3 months, delivering a production-ready CI/CD platform for many development teams"
-      - "Helped implement Terraform for infrastructure as code for GitHub repositories, automating environment-level and repo-level secrets and variables, provisioning and reducing manual configuration time significantly"
-      - "Helped implement a by-environment service account PAT rotation for GitHub Actions, enhancing security and compliance with ISO standards"
-      - "Created shared GitHub Actions repository for consistent CI/CD pipelines across Java, Angular, and Python codebases, reducing pipeline creation time by 50%"
-      - "Implemented comprehensive GitHub Actions testing frameworks and deployment strategies to ensure zero-downtime migrations"
+      - "Spearheaded large-scale migration of 180+ production repositories to GitHub Actions, achieving 50% reduction in build times and optimizing release capacity costs"
+      - "Designed and implemented shared GitHub Actions repository for consistent CI/CD pipelines across Java, Angular, and Python codebases, reducing pipeline creation time by 50%"
+      - "Implemented Terraform infrastructure as code for GitHub repositories, automating environment-level secrets provisioning and significantly reducing manual configuration"
+      - "Enhanced security compliance by architecting by-environment service account PAT rotation for GitHub Actions"
+      - "Delivered production-ready CI/CD platform by mastering GitHub Actions, Terraform, and AWS within 3 months"
 
   - company: Leading EDJE  
     client: Leaf Home Solutions
+    role: Web/Mobile Developer
     date: Oct 2022 - May 2024
     achievements:
-      - "Learned and implemented Blazor WebAssembly application in 3 months with a 5 person scrum team, delivering a production-ready application ahead of schedule"
-      - "Helped architect and develop Blazor WebAssembly application with custom checklist components for field installer job and service ticket management, handling 1000+ daily work orders"
-      - "Optimized Blazor WebAssembly application image loading and caching, reducing load times and improving user experience for installers in low signal areas"
-      - "Established comprehensive testing practices using BUnit and xUnit across Blazor WebAssembly application and Job API, achieving 80% code coverage over 1000+"
-      - "Integrated NetSuite ERP system with custom workflows in legacy monolithic ASP.NET Operations application for automated financial processing and reporting from their legacy system allowing for real-time data synchronization and reducing manual data entry significantly"
-      - "Added unit tests to NetSuite integration code in the legacy ASP.NET Operations application where none existed, achieving 100% code coverage and reducing regression issues"
-      - "Dealt with multiple project management changes and requirements changes during the NetSuite integration project, adapting to new requirements and delivering on time"
-      - "Learned Logic Apps and implemented a custom Logic App in Azure for a 3rd party logistics integration, reducing manual data entry and improving data accuracy"
+      - "Led 5-person scrum team in architecting and developing secure Blazor WebAssembly application managing 1000+ daily work orders"
+      - "Established comprehensive testing practices including unit, integration, and end-to-end tests achieving 80% code coverage"
+      - "Integrated NetSuite ERP with legacy ASP.NET Operations application, implementing SOX-compliant financial processing workflows"
+      - "Collaborated with business stakeholders to adapt to changing requirements while maintaining project timeline and quality"
+      - "Mentored junior developers through code reviews and pair programming sessions, improving team velocity"
+      - "Implemented comprehensive logging and monitoring solutions for enhanced operational visibility and troubleshooting"
 
   - company: Leading EDJE
-    client: Crown Equipment  
+    client: Crown Equipment
+    role: Backend Software Engineer
     date: Jan 2022 - Sep 2022
     achievements:
-      - "Completed external API project in 9 months on a 5 person scrum team, delivering a month ahead of schedule and under budget"
-      - "Developed suite of high-throughput AWS-hosted Java APIs serving a large customer fleet management system, processing over 7M requests monthly across 3 availability zones"
-      - "Engineered REST APIs achieving 99.9% success rate with sub-200ms response times for critical endpoints like Impact tracking (4.1M requests/month) and Session management (2.3M requests/month)"
-      - "Implemented comprehensive monitoring using Dynatrace and OpenSearch (Kibana) dashboards, enabling real-time performance tracking and alerting across 7 core microservices"
-      - "Created comprehensive Spring unit tests, with additional testing suites using Karate framework for performance testing, supported by detailed logging and metrics visualization for rapid issue resolution"
+      - "Engineered high-throughput AWS-hosted Java APIs processing 7M+ monthly requests with 99.9% success rate"
+      - "Implemented real-time monitoring across 7 microservices using Dynatrace and OpenSearch dashboards"
+      - "Designed REST APIs achieving sub-200ms response times for critical endpoints handling 4.1M+ monthly requests"
+      - "Delivered comprehensive testing strategy using Spring Test and Karate framework with detailed performance metrics"
 
-  - company: Priority Health / Corewell Health (formerly Spectrum Health)
+  - company: Priority Health / Corewell Health
+    role: Backend Software Engineer
     date: May 2014 - Jan 2022
     achievements:
-      - "Engineered Java SOAP and REST APIs integrating Epic and Cerner systems for MyHealth patient portal, serving 500,000+ active patients"
-      - "Led migration from monolithic SOAP services to REST microservices using Spring Boot, implementing HL7 standards"
-      - "Helped deprecate Cerner integration in favor of Epic Interconnect, reducing maintenance costs and improving system reliability"
-      - "Dealt with many organizational changes and project management changes during the COVID pandemic, adapting to team changes and responsibilities"
-      - "Developed and maintained core patient services including lab results, imaging results, and appointment scheduling through Epic Interconnect"
-      - "Worked with PHI data and HIPAA compliance, ensuring data security and privacy for patient information"
-      - "Helped implement transaction outbox pattern for reliable messaging between microservices, reducing data loss and improving system reliability for insurance claims processing"
-      - "Helped enhance onboarding process for new developers, creating comprehensive documentation and training materials for new hires"
-      - "Worked on COVID vaccine scheduling project, implementing appointment scheduling and patient notifications in a short 1 month timeframe"
-      - "Achieved Epic Interconnect and Chronicles Database certifications, contributing to Gold Partner status with Epic Systems, reducing partner costs"
-      - "Implemented patient identity verification system using LexisNexis APIs for fraud prevention, reducing false positives"
-      - "Led Twilio integration for patient communications, reducing appointment no-shows by 20%"
-      - "Helped migration from On-Prem Jboss web services to OpenShift microservices, then OpenShift to AWS, reducing maintenance costs and improving deployment, scaling, and monitoring capabilities"
+      - "Engineered Java APIs integrating Epic and Cerner systems for patient portal serving 500K+ users"
+      - "Led migration from monolithic SOAP services to Spring Boot microservices using HL7 standards"
+      - "Implemented transaction outbox pattern for reliable insurance claims processing"
+      - "Achieved Epic certifications contributing to Gold Partner status and reduced partner costs"
+      - "Integrated Twilio communications reducing appointment no-shows by 20%"
+      - "Orchestrated migration from on-premise JBoss to AWS microservices, improving scalability"
 
 education:
   - institution: Western Michigan University
@@ -91,9 +91,8 @@ education:
 
 certifications:
   - title: Microsoft Certified - Azure Fundamentals
-  - title: HL7 FHIR Fundamentals Course
-  - title: Epic Chronicles Database & Interconnect Programmer Certification
   - title: AWS Partner - Technical Accreditation
+  - title: Epic Chronicles Database & Interconnect Programmer Certification
 
 projects:
   - "Developed AI-powered sports prediction model using Azure ML and .NET, achieving projected 10% ROI on NCAA Tournament predictions"

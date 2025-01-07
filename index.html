@@ -25,10 +25,14 @@ layout: default
     <div class="experience-item">
         <div class="experience-header">
             <div class="title-group">
-                <span class="company">{{ job.company }}{% if job.client %} | {{ job.client }}{% endif
-                    %}</span>
+                <div class="company-line">
+                    <span class="company">{{ job.company }}{% if job.client %} | {{ job.client }}{% endif %}</span>
+                    <span class="date">{{ job.date }}</span>
+                </div>
+                <div class="role-line">
+                    <span class="role">{{ job.role }}</span>
+                </div>
             </div>
-            <span class="date">{{ job.date }}</span>
         </div>
         <ul class="achievements">
             {% for achievement in job.achievements %}
