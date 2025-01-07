@@ -20,7 +20,7 @@ jobs:
         run: |
           npm install
           npm install -g markdownlint-cli prettier yaml-lint sass-lint
-          npm install -D eslint eslint-plugin-jest html-validate
+          npm install -D eslint eslint-plugin-jest html-validate eslint-config-prettier
 
       - name: Lint JavaScript
         run: |
