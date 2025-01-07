@@ -4,15 +4,16 @@ layout: default
 
 <section id="summary" aria-labelledby="summary-title">
     <h2 id="summary-title">Professional Summary</h2>
-    <p>{{ site.data.resume.summary }}</p>
+    <p>{{ site.data.resume.summary | markdownify }}</p>
 </section>
 
 <section id="skills" aria-labelledby="skills-title">
-    <h2 id="skills-title">Skills</h2>
+    <h2 id="skills-title">Technical Skills</h2>
     <div class="skills-grid">
         {% for skill in site.data.resume.skills %}
         <div class="skill-category">
-            <strong>{{ skill.category | replace: '&', '&amp;' }}:</strong> {{ skill.items }}
+            <strong>{{ skill.category | escape }}</strong>
+            <div class="skill-items">{{ skill.items }}</div>
         </div>
         {% endfor %}
     </div>
@@ -23,13 +24,16 @@ layout: default
     {% for job in site.data.resume.experience %}
     <div class="experience-item">
         <div class="experience-header">
-            <span class="company">{{ job.company }} | {{ job.organization }}</span>
+            <div class="title-group">
+                <span class="company">{{ job.company }}{% if job.client %} | {{ job.client }}{% endif
+                    %}</span>
+            </div>
             <span class="date">{{ job.date }}</span>
         </div>
-        <ul>
+        <ul class="achievements">
             {% for achievement in job.achievements %}
-            <li>{{ achievement | replace: '>', '&gt;' | replace: '<', '&lt;' }}</li>
-                    {% endfor %}
+            <li>{{ achievement | escape }}</li>
+            {% endfor %}
         </ul>
     </div>
     {% endfor %}
@@ -38,19 +42,19 @@ layout: default
 <section id="education" aria-labelledby="education-title">
     <h2 id="education-title">Education</h2>
     {% for edu in site.data.resume.education %}
-    <div class="experience-item">
+    <div class="education-item">
         <div class="experience-header">
-            <span class="company">{{ edu.institution }}</span>
+            <span class="institution">{{ edu.institution }}</span>
             <span class="date">{{ edu.date }}</span>
         </div>
-        <div>{{ edu.degree }}</div>
+        <div class="degree">{{ edu.degree }}</div>
     </div>
     {% endfor %}
 </section>
 
 <section id="certifications" aria-labelledby="certifications-title">
-    <h2 id="certifications-title">Certifications &amp; Professional Development</h2>
-    <ul>
+    <h2 id="certifications-title">Certifications</h2>
+    <ul class="certifications-list">
         {% for cert in site.data.resume.certifications %}
         <li>{{ cert.title }}</li>
         {% endfor %}
@@ -58,10 +62,10 @@ layout: default
 </section>
 
 <section id="projects" aria-labelledby="projects-title">
-    <h2 id="projects-title">Side Projects</h2>
-    <ul>
+    <h2 id="projects-title">Notable Projects</h2>
+    <ul class="projects-list">
         {% for project in site.data.resume.projects %}
-        <li>{{ project }}</li>
+        <li>{{ project | markdownify }}</li>
         {% endfor %}
     </ul>
 </section>

@@ -4,7 +4,7 @@ contact:
   location: Grand Rapids, Michigan
   email: jeffwilliams824@gmail.com
   linkedin: jeffrey-williams-2639576a
-  github: # Add your GitHub if you have relevant repos
+  github: jwill824
 
 summary: >
   Versatile Software Engineer with extensive experience in developing and optimizing enterprise-level applications. 
@@ -13,53 +13,76 @@ summary: >
 
 skills:
   - category: Core Technologies
-    items: C# (.NET 8, .NET Core), Java (Spring Boot), JavaScript/TypeScript, Python
+    items: C# (.NET Core), Java (Spring Boot), JavaScript/TypeScript, Python
   - category: Cloud & Infrastructure  
-    items: AWS, Azure, OpenShift, Kubernetes, Docker, Terraform
+    items: AWS (Console, CLI), Azure (DevOps), OpenShift, Kubernetes, Docker, Terraform, Packer
   - category: CI/CD & DevOps
-    items: GitHub Actions, Jenkins, Infrastructure as Code (IaC)
+    items: GitHub Actions, Jenkins, Azure DevOps, SonarQube, Dynatrace, OpenSearch
   - category: Databases & Integration
-    items: MS SQL Server, Oracle, MySQL, REST APIs, HL7, Epic Interconnect
+    items: MS SQL Server, Oracle, MySQL, PostgreSQL, REST, SOAP, ESB, HL7, Epic Interconnect, GraphQL
   - category: Web Technologies
-    items: ASP.NET Core, Blazor WASM, Angular, React
+    items: ASP.NET Core, Blazor WASM, Angular, React, HTML, CSS, Bootstrap
   - category: Architecture
-    items: Microservices, Event-driven Architecture, SOLID Principles
+    items: Microservices, Event-driven Architecture, SOLID, ACID
+  - category: Data & ORM
+    items: Entity Framework, LINQ, Hibernate, JPA, JDBC
+  - category: Testing
+    items: JUnit, xUnit, BUnit, Karate, Cucumber, Postman, testcontainers
+  - category: Tools & Methodologies
+    items: Git, Agile, Scrum, Jira, Confluence, TDD, BDD, Pair Programming, Rubber Duck Debugging
 
 experience:
   - company: Leading EDJE
-    organization: Crown Equipment
+    client: Crown Equipment
     date: May 2024 - Present
     achievements:
-      - Led large-scale migration of 180+ production repositories from Bamboo to GitHub Actions, achieving 100% successful migration with zero production incidents
-      - Engineered robust CI/CD pipelines using Terraform and GitHub Actions, reducing deployment time by 40% and improving reliability
-      - Developed custom Python-based linting tools and documentation generators, increasing code quality metrics by 25%
-      - Implemented automated testing frameworks reducing regression issues by 35%
+      - "Helped lead a large-scale lift-and-shift migration of 180+ production repositories from On-Prem Bamboo to GitHub Actions, reducing production build times in half and thus reducing release capacity costs"
+      - "Dealt with high pressure and tight deadlines during the migration project, keeping the team focused and on track to meet the deadline"
+      - "First time working as a devops engineer, learned and implemented GitHub Actions, Terraform, AWS, and Docker in 3 months, delivering a production-ready CI/CD platform for many development teams"
+      - "Helped implement Terraform for infrastructure as code for GitHub repositories, automating environment-level and repo-level secrets and variables, provisioning and reducing manual configuration time significantly"
+      - "Helped implement a by-environment service account PAT rotation for GitHub Actions, enhancing security and compliance with ISO standards"
+      - "Created shared GitHub Actions repository for consistent CI/CD pipelines across Java, Angular, and Python codebases, reducing pipeline creation time by 50%"
+      - "Implemented comprehensive GitHub Actions testing frameworks and deployment strategies to ensure zero-downtime migrations"
 
   - company: Leading EDJE  
-    organization: Leaf Home Solutions
+    client: Leaf Home Solutions
     date: Oct 2022 - May 2024
     achievements:
-      - Architected and developed Blazor WebAssembly application that increased field installer efficiency by 45% through streamlined job management
-      - Reduced application load time by 33% through optimized component architecture and lazy loading implementation
-      - Integrated NetSuite workflows achieving 99.9% accounting data accuracy
-      - Led implementation of comprehensive testing suite with 90% code coverage using BUnit and xUnit
+      - "Learned and implemented Blazor WebAssembly application in 3 months with a 5 person scrum team, delivering a production-ready application ahead of schedule"
+      - "Helped architect and develop Blazor WebAssembly application with custom checklist components for field installer job and service ticket management, handling 1000+ daily work orders"
+      - "Optimized Blazor WebAssembly application image loading and caching, reducing load times and improving user experience for installers in low signal areas"
+      - "Established comprehensive testing practices using BUnit and xUnit across Blazor WebAssembly application and Job API, achieving 80% code coverage over 1000+"
+      - "Integrated NetSuite ERP system with custom workflows in legacy monolithic ASP.NET Operations application for automated financial processing and reporting from their legacy system allowing for real-time data synchronization and reducing manual data entry significantly"
+      - "Added unit tests to NetSuite integration code in the legacy ASP.NET Operations application where none existed, achieving 100% code coverage and reducing regression issues"
+      - "Dealt with multiple project management changes and requirements changes during the NetSuite integration project, adapting to new requirements and delivering on time"
+      - "Learned Logic Apps and implemented a custom Logic App in Azure for a 3rd party logistics integration, reducing manual data entry and improving data accuracy"
 
   - company: Leading EDJE
-    organization: Crown Equipment  
+    client: Crown Equipment  
     date: Jan 2022 - Sep 2022
     achievements:
-      - Developed 7 high-performance AWS-hosted Java APIs serving 50,000+ daily requests with 99.95% uptime
-      - Optimized API response times by 40% through caching implementation and query optimization
-      - Created comprehensive test suites using Karate achieving 95% test coverage
-      - Implemented Dynatrace monitoring dashboards reducing MTTR by 60%
+      - "Completed external API project in 9 months on a 5 person scrum team, delivering a month ahead of schedule and under budget"
+      - "Developed suite of high-throughput AWS-hosted Java APIs serving a large customer fleet management system, processing over 7M requests monthly across 3 availability zones"
+      - "Engineered REST APIs achieving 99.9% success rate with sub-200ms response times for critical endpoints like Impact tracking (4.1M requests/month) and Session management (2.3M requests/month)"
+      - "Implemented comprehensive monitoring using Dynatrace and OpenSearch (Kibana) dashboards, enabling real-time performance tracking and alerting across 7 core microservices"
+      - "Created comprehensive Spring unit tests, with additional testing suites using Karate framework for performance testing, supported by detailed logging and metrics visualization for rapid issue resolution"
 
-  - company: Corewell Health
+  - company: Priority Health / Corewell Health (formerly Spectrum Health)
     date: May 2014 - Jan 2022
     achievements:
-      - Engineered SOAP API integration between Epic and Cerner systems handling 1M+ daily patient records
-      - Maintained Goldstar certification rating while migrating services from OpenShift to AWS
-      - Led documentation initiatives resulting in 40% reduction in onboarding time
-      - Achieved Epic Interconnect certification and built REST services with 99.99% uptime
+      - "Engineered Java SOAP and REST APIs integrating Epic and Cerner systems for MyHealth patient portal, serving 500,000+ active patients"
+      - "Led migration from monolithic SOAP services to REST microservices using Spring Boot, implementing HL7 standards"
+      - "Helped deprecate Cerner integration in favor of Epic Interconnect, reducing maintenance costs and improving system reliability"
+      - "Dealt with many organizational changes and project management changes during the COVID pandemic, adapting to team changes and responsibilities"
+      - "Developed and maintained core patient services including lab results, imaging results, and appointment scheduling through Epic Interconnect"
+      - "Worked with PHI data and HIPAA compliance, ensuring data security and privacy for patient information"
+      - "Helped implement transaction outbox pattern for reliable messaging between microservices, reducing data loss and improving system reliability for insurance claims processing"
+      - "Helped enhance onboarding process for new developers, creating comprehensive documentation and training materials for new hires"
+      - "Worked on COVID vaccine scheduling project, implementing appointment scheduling and patient notifications in a short 1 month timeframe"
+      - "Achieved Epic Interconnect and Chronicles Database certifications, contributing to Gold Partner status with Epic Systems, reducing partner costs"
+      - "Implemented patient identity verification system using LexisNexis APIs for fraud prevention, reducing false positives"
+      - "Led Twilio integration for patient communications, reducing appointment no-shows by 20%"
+      - "Helped migration from On-Prem Jboss web services to OpenShift microservices, then OpenShift to AWS, reducing maintenance costs and improving deployment, scaling, and monitoring capabilities"
 
 education:
   - institution: Western Michigan University
@@ -74,4 +97,3 @@ certifications:
 
 projects:
   - "Developed AI-powered sports prediction model using Azure ML and .NET, achieving projected 10% ROI on NCAA Tournament predictions"
-  - "Building Table Tennis ELO rating system using Python and FastAPI, incorporating real-time match data and player statistics"

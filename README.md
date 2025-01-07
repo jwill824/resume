@@ -7,7 +7,6 @@ A Jekyll-based resume website with automated PDF generation, dynamic skill years
 This repository contains my professional resume, built using Jekyll and automatically deployed to GitHub Pages. It features:
 
 - Responsive design with SCSS
-- Dynamic calculation of years of experience for skills
 - Automated PDF generation with proper styling
 - Version-controlled content in YAML format
 - Comprehensive test suite
