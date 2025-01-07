@@ -1,5 +1,12 @@
-const puppeteer = require('puppeteer');
-const fs = require('fs');
+import puppeteer from 'puppeteer';
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import { join } from 'path';
+
+// Get the current file's directory
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 (async () => {
     try {
@@ -15,19 +22,21 @@ const fs = require('fs');
             width: 1200,
             height: 800
         });
+
         // Read the CSS file content
-        const cssContent = fs.readFileSync('_site/assets/css/styles.css', 'utf8');
+        const cssContent = readFileSync('_site/assets/css/styles.css', 'utf8');
 
         // Navigate to the HTML file
         await page.goto(`file:${process.cwd()}/_site/index.html`, {
             waitUntil: ['networkidle0', 'domcontentloaded']
         });
+
         // Inject styles directly into the page
         await page.addStyleTag({ content: cssContent });
+
         // Use evaluate to ensure everything is loaded
         await page.evaluate(() => {
             return new Promise((resolve) => {
-                // Wait for images and fonts to load
                 if (document.readyState === 'complete') {
                     resolve();
                 } else {
@@ -35,6 +44,7 @@ const fs = require('fs');
                 }
             });
         });
+
         // Generate PDF with proper settings
         await page.pdf({
             path: '_site/resume.pdf',
@@ -48,6 +58,7 @@ const fs = require('fs');
             printBackground: true,
             preferCSSPageSize: true
         });
+
         await browser.close();
         console.log('PDF generated successfully');
     } catch (error) {
