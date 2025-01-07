@@ -63,7 +63,7 @@ jobs:
           lhci autorun
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            
+
       - name: Add Lighthouse Status Check
         if: github.event_name == 'pull_request'
         run: |

@@ -13,110 +13,109 @@ $print-spacing-xl: 16pt;
 $print-text-dark: #333;
 
 @media print {
+  // Page setup
+  @page {
+    size: A4;
+    margin: $print-margin;
+  }
 
-    // Page setup
-    @page {
-        size: A4;
-        margin: $print-margin;
+  // Global print adjustments
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  // Basic document setup
+  html,
+  body {
+    width: 210mm;
+    height: 297mm;
+    background-color: white !important;
+    font-size: $print-font-body;
+  }
+
+  // Container adjustments
+  .container {
+    width: 100%;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  // Header styles
+  header {
+    .download-container {
+      display: none !important;
     }
 
-    // Global print adjustments
-    * {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
+    h1 {
+      font-size: $print-font-h1;
+      margin-bottom: $print-spacing-md;
     }
 
-    // Basic document setup
-    html,
-    body {
-        width: 210mm;
-        height: 297mm;
-        background-color: white !important;
-        font-size: $print-font-body;
+    .contact-info {
+      margin-bottom: $print-spacing-lg;
+    }
+  }
+
+  // Section headings
+  h2 {
+    font-size: $print-font-h2;
+    margin-top: $print-spacing-lg;
+    padding-bottom: $print-spacing-sm;
+    break-after: avoid;
+  }
+
+  // Skills section
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, math.div(100%, 2));
+    gap: $print-spacing-md;
+    break-inside: avoid;
+
+    .skill-category {
+      break-inside: avoid;
     }
 
-    // Container adjustments
-    .container {
-        width: 100%;
-        max-width: none !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        box-shadow: none !important;
+    .years {
+      color: color.adjust($print-text-dark, $lightness: 20%) !important;
+    }
+  }
+
+  // Experience section
+  .experience-item {
+    break-inside: avoid;
+    margin-bottom: $print-spacing-lg;
+
+    .experience-header {
+      margin-bottom: $print-spacing-sm;
     }
 
-    // Header styles
-    header {
-        .download-container {
-            display: none !important;
-        }
+    ul {
+      margin-top: $print-spacing-sm;
+      padding-left: $print-spacing-xl;
 
-        h1 {
-            font-size: $print-font-h1;
-            margin-bottom: $print-spacing-md;
-        }
-
-        .contact-info {
-            margin-bottom: $print-spacing-lg;
-        }
-    }
-
-    // Section headings
-    h2 {
-        font-size: $print-font-h2;
-        margin-top: $print-spacing-lg;
-        padding-bottom: $print-spacing-sm;
-        break-after: avoid;
-    }
-
-    // Skills section
-    .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(2, math.div(100%, 2));
-        gap: $print-spacing-md;
+      li {
+        margin-bottom: $print-spacing-sm;
         break-inside: avoid;
-
-        .skill-category {
-            break-inside: avoid;
-        }
-
-        .years {
-            color: color.adjust($print-text-dark, $lightness: 20%) !important;
-        }
+      }
     }
+  }
 
-    // Experience section
-    .experience-item {
-        break-inside: avoid;
-        margin-bottom: $print-spacing-lg;
+  // Links
+  a {
+    text-decoration: none;
+    color: $print-text-dark !important;
+  }
 
-        .experience-header {
-            margin-bottom: $print-spacing-sm;
-        }
-
-        ul {
-            margin-top: $print-spacing-sm;
-            padding-left: $print-spacing-xl;
-
-            li {
-                margin-bottom: $print-spacing-sm;
-                break-inside: avoid;
-            }
-        }
-    }
-
-    // Links
-    a {
-        text-decoration: none;
-        color: $print-text-dark !important;
-    }
-
-    // Page break controls
-    #summary,
-    #skills,
-    #experience,
-    #education,
-    #certifications,
-    #projects {
-        break-inside: avoid-start;
-    }
+  // Page break controls
+  #summary,
+  #skills,
+  #experience,
+  #education,
+  #certifications,
+  #projects {
+    break-inside: avoid-start;
+  }
 }

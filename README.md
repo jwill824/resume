@@ -57,26 +57,26 @@ Content is stored in `_data/resume.yml` with the following structure:
 
 ```yaml
 contact:
-  name: "Your Name"
-  title: "Your Title"
-  location: "Your Location"
-  email: "your.email@example.com"
-  linkedin: "linkedin-profile-id"
+  name: 'Your Name'
+  title: 'Your Title'
+  location: 'Your Location'
+  email: 'your.email@example.com'
+  linkedin: 'linkedin-profile-id'
 
 skills:
-  - category: "Category Name"
-    items: "Skill 1, Skill 2, Skill 3"
+  - category: 'Category Name'
+    items: 'Skill 1, Skill 2, Skill 3'
 
 experience:
-  - company: "Company Name"
-    organization: "Organization"
-    date: "Date Range"
+  - company: 'Company Name'
+    organization: 'Organization'
+    date: 'Date Range'
     achievements:
-      - "Achievement 1"
-      - "Achievement 2"
+      - 'Achievement 1'
+      - 'Achievement 2'
 
 certifications:
-  - title: "Certification Name"
+  - title: 'Certification Name'
 ```
 
 ### Dynamic Skills Experience
@@ -101,6 +101,7 @@ The site uses SCSS with Jekyll's built-in SASS processing:
 ### Test Suites
 
 1. **Unit Tests** (Jest)
+
    - Skills experience calculation
    - Date parsing and formatting
    - Edge case handling
@@ -110,6 +111,7 @@ The site uses SCSS with Jekyll's built-in SASS processing:
    ```
 
 2. **Accessibility Testing** (Playwright + axe-core)
+
    - WCAG compliance checking
    - Screen reader compatibility
    - Keyboard navigation
@@ -120,6 +122,7 @@ The site uses SCSS with Jekyll's built-in SASS processing:
    ```
 
 3. **Visual Regression Testing** (Playwright)
+
    - Screenshot comparison
    - Layout consistency
    - Responsive design verification
@@ -131,6 +134,7 @@ The site uses SCSS with Jekyll's built-in SASS processing:
    ```
 
 4. **Performance Testing** (Playwright + Lighthouse)
+
    - Performance scores
    - Accessibility scores
    - Best practices verification
@@ -291,17 +295,20 @@ npm run test:watch
 ### Common Issues
 
 1. **Test Environment Setup**
+
    - If using devcontainer, try rebuilding the container
    - Ensure Ruby and Node.js are installed
    - Check all dependencies are installed
    - Verify Jekyll site builds correctly
 
 2. **Visual Regression Testing**
+
    - First run creates baseline
    - Subsequent runs compare against baseline
    - Check `tests/results` for diff images
 
 3. **Accessibility Testing**
+
    - Review violations in test output
    - Check WCAG compliance levels
    - Verify aria labels and roles

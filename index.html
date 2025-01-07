@@ -3,73 +3,75 @@ layout: default
 ---
 
 <section class="summary">
-    <h2>Professional Summary</h2>
-    {{ site.data.resume.summary | markdownify }}
+  <h2>Professional Summary</h2>
+  {{ site.data.resume.summary | markdownify }}
 </section>
 
 <section class="experience">
-    <h2>Professional Experience</h2>
-    {% for job in site.data.resume.experience %}
-    <div class="experience-item">
-        <div class="experience-header">
-            <div class="title-group">
-                <div class="company-line">
-                    <span class="company">{{ job.company }}{% if job.client %} | {{ job.client }}{% endif %}</span>
-                    <span class="date">{{ job.date }}</span>
-                </div>
-                <div class="role-line">
-                    <span class="role">{{ job.role }}</span>
-                </div>
-            </div>
+  <h2>Professional Experience</h2>
+  {% for job in site.data.resume.experience %}
+  <div class="experience-item">
+    <div class="experience-header">
+      <div class="title-group">
+        <div class="company-line">
+          <span class="company"
+            >{{ job.company }}{% if job.client %} | {{ job.client }}{% endif %}</span
+          >
+          <span class="date">{{ job.date }}</span>
         </div>
-        <ul>
-            {% for achievement in job.achievements %}
-            <li>{{ achievement | escape }}</li>
-            {% endfor %}
-        </ul>
+        <div class="role-line">
+          <span class="role">{{ job.role }}</span>
+        </div>
+      </div>
     </div>
-    {% endfor %}
+    <ul>
+      {% for achievement in job.achievements %}
+      <li>{{ achievement | escape }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
 </section>
 
 <section class="skills">
-    <h2>Skills</h2>
-    <div class="skills-grid">
-        {% for skill in site.data.resume.skills %}
-        <div class="skill-category">
-            <strong>{{ skill.category | escape }}:</strong>
-            <span>{{ skill.items }}</span>
-        </div>
-        {% endfor %}
+  <h2>Skills</h2>
+  <div class="skills-grid">
+    {% for skill in site.data.resume.skills %}
+    <div class="skill-category">
+      <strong>{{ skill.category | escape }}:</strong>
+      <span>{{ skill.items }}</span>
     </div>
+    {% endfor %}
+  </div>
 </section>
 
 <section class="education">
-    <h2>Education</h2>
-    {% for edu in site.data.resume.education %}
-    <div class="education-item">
-        <div class="institution-line">
-            <span class="institution">{{ edu.institution }}</span>
-            <span class="date">{{ edu.date }}</span>
-        </div>
-        <div class="degree">{{ edu.degree }}</div>
+  <h2>Education</h2>
+  {% for edu in site.data.resume.education %}
+  <div class="education-item">
+    <div class="institution-line">
+      <span class="institution">{{ edu.institution }}</span>
+      <span class="date">{{ edu.date }}</span>
     </div>
-    {% endfor %}
+    <div class="degree">{{ edu.degree }}</div>
+  </div>
+  {% endfor %}
 </section>
 
 <section class="certifications">
-    <h2>Certifications</h2>
-    <ul>
-        {% for cert in site.data.resume.certifications %}
-        <li>{{ cert.title | markdownify }}</li>
-        {% endfor %}
-    </ul>
+  <h2>Certifications</h2>
+  <ul>
+    {% for cert in site.data.resume.certifications %}
+    <li>{{ cert.title | markdownify }}</li>
+    {% endfor %}
+  </ul>
 </section>
 
 <section class="projects">
-    <h2>Notable Projects</h2>
-    <ul>
-        {% for project in site.data.resume.projects %}
-        <li>{{ project | markdownify }}</li>
-        {% endfor %}
-    </ul>
+  <h2>Notable Projects</h2>
+  <ul>
+    {% for project in site.data.resume.projects %}
+    <li>{{ project | markdownify }}</li>
+    {% endfor %}
+  </ul>
 </section>

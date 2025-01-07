@@ -1,5 +1,5 @@
 contact:
-  name: Jeffrey (Jeff) Williams 
+  name: Jeffrey (Jeff) Williams
   title: Software Engineer
   location: Grand Rapids, Michigan
   email: jeffwilliams824@gmail.com
@@ -18,7 +18,7 @@ skills:
   - category: Security & Protocols
     items: OAuth 2.0, SSL/TLS, HIPAA Compliance, Data Encryption, Audit Logging
 
-  - category: Cloud & Infrastructure  
+  - category: Cloud & Infrastructure
     items: Azure DevOps (Console, CLI), AWS (Console, CLI), OpenShift, Kubernetes, Docker, Terraform, VM Management
 
   - category: CI/CD & DevOps
@@ -42,48 +42,48 @@ experience:
     role: DevOps Engineer
     date: May 2024 - Present
     achievements:
-      - "Spearheaded large-scale migration of 180+ production repositories to GitHub Actions, achieving 50% reduction in build times and optimizing release capacity costs"
-      - "Delivered production-ready CI/CD platform by mastering GitHub Actions, Terraform, and AWS within 3 months"
-      - "Designed and implemented shared GitHub Actions repository for consistent CI/CD pipelines across DotNet, Java, Angular, and Python codebases, reducing pipeline creation time by 50%"
-      - "Implemented Terraform infrastructure as code for GitHub repositories, automating environment-level secrets provisioning and significantly reducing manual configuration"
-      - "Enhanced security compliance by architecting by-environment service account PAT rotation for GitHub Actions"
-      - "Partnered on Java 11 to 17 migration initiative, coordinating with an architects to ensure migration success and fallback strategies"
+      - 'Spearheaded large-scale migration of 180+ production repositories to GitHub Actions, achieving 50% reduction in build times and optimizing release capacity costs'
+      - 'Delivered production-ready CI/CD platform by mastering GitHub Actions, Terraform, and AWS within 3 months'
+      - 'Designed and implemented shared GitHub Actions repository for consistent CI/CD pipelines across DotNet, Java, Angular, and Python codebases, reducing pipeline creation time by 50%'
+      - 'Implemented Terraform infrastructure as code for GitHub repositories, automating environment-level secrets provisioning and significantly reducing manual configuration'
+      - 'Enhanced security compliance by architecting by-environment service account PAT rotation for GitHub Actions'
+      - 'Partnered on Java 11 to 17 migration initiative, coordinating with an architects to ensure migration success and fallback strategies'
 
-  - company: Leading EDJE  
+  - company: Leading EDJE
     client: Leaf Home Solutions
     role: Backend/Web/Mobile Developer
     date: Oct 2022 - May 2024
     achievements:
-      - "Ramped up on Blazor WebAssembly and Azure DevOps within 1 month to deliver production-ready code"
-      - "Worked on a lean scrum team in architecting and developing a Blazor WebAssembly job installer application managing 1000+ daily work orders"
-      - "Helped implement the Jobs API microservice in Azure Functions which communicated with on-prem SQL Server stored procedures, processing 10K+ daily requests with 99.9% success rate"
-      - "Established comprehensive testing practices including bUnit, xUnit, and end-to-end tests achieving above baseline code coverage"
-      - "Integrated NetSuite ERP with legacy ASP.NET Operations application, saving significant manual entry resources"
-      - "Collaborated with business stakeholders to adapt to rapidly changing requirements while maintaining project timeline and quality"
-      - "Quickly dived into working on Logic Apps to automate logistics file processing via sftp, reducing manual errors and improving data accuracy"
+      - 'Ramped up on Blazor WebAssembly and Azure DevOps within 1 month to deliver production-ready code'
+      - 'Worked on a lean scrum team in architecting and developing a Blazor WebAssembly job installer application managing 1000+ daily work orders'
+      - 'Helped implement the Jobs API microservice in Azure Functions which communicated with on-prem SQL Server stored procedures, processing 10K+ daily requests with 99.9% success rate'
+      - 'Established comprehensive testing practices including bUnit, xUnit, and end-to-end tests achieving above baseline code coverage'
+      - 'Integrated NetSuite ERP with legacy ASP.NET Operations application, saving significant manual entry resources'
+      - 'Collaborated with business stakeholders to adapt to rapidly changing requirements while maintaining project timeline and quality'
+      - 'Quickly dived into working on Logic Apps to automate logistics file processing via sftp, reducing manual errors and improving data accuracy'
 
   - company: Leading EDJE
     client: Crown Equipment
     role: Backend Software Engineer
     date: Jan 2022 - Sep 2022
     achievements:
-      - "Delivered 9-month project on time and under budget by helping a 5-person scrum team through Agile practices"
-      - "Engineered high-throughput AWS-hosted External REST Java APIs processing 7M+ monthly requests with 99.9% success rate while achieving sub-200ms response times"
-      - "Implemented real-time monitoring across 7 microservices using Dynatrace and OpenSearch dashboards"
-      - "Delivered comprehensive testing strategy using SpringBoot testing and Karate framework with detailed performance metrics"
-      - "Helped integrate OAuth2 solution with Auth0 for External REST APIs, achieving compliance with ISO security standards and ease of use for consumers"
+      - 'Delivered 9-month project on time and under budget by helping a 5-person scrum team through Agile practices'
+      - 'Engineered high-throughput AWS-hosted External REST Java APIs processing 7M+ monthly requests with 99.9% success rate while achieving sub-200ms response times'
+      - 'Implemented real-time monitoring across 7 microservices using Dynatrace and OpenSearch dashboards'
+      - 'Delivered comprehensive testing strategy using SpringBoot testing and Karate framework with detailed performance metrics'
+      - 'Helped integrate OAuth2 solution with Auth0 for External REST APIs, achieving compliance with ISO security standards and ease of use for consumers'
 
   - company: Priority Health / Corewell Health
     role: Backend Software Engineer
     date: May 2014 - Jan 2022
     achievements:
-      - "Engineered Java APIs integrating Epic and Cerner systems for patient portal serving 500K+ users"
-      - "Wrote imaging result microservice from the ground up for the original patient portal, allowing patients to view results within 24 hours"
-      - "Implemented transaction outbox pattern for reliable insurance claims processing"
-      - "Achieved Epic certifications contributing to Gold Partner status and reduced partner costs"
-      - "Helped develop patient communication and new patient login features for rapid COVID-19 response"
-      - "Adjusted through multiple organization changes and helped on migrations including SOAP to REST Java microservices, Cerner and Epic to single source Epic, on-prem JBoss to OpenShift, and OpenShift to AWS"
-      - "Mentored junior developers through onboarding, code reviews and pair programming sessions, improving team velocity"
+      - 'Engineered Java APIs integrating Epic and Cerner systems for patient portal serving 500K+ users'
+      - 'Wrote imaging result microservice from the ground up for the original patient portal, allowing patients to view results within 24 hours'
+      - 'Implemented transaction outbox pattern for reliable insurance claims processing'
+      - 'Achieved Epic certifications contributing to Gold Partner status and reduced partner costs'
+      - 'Helped develop patient communication and new patient login features for rapid COVID-19 response'
+      - 'Adjusted through multiple organization changes and helped on migrations including SOAP to REST Java microservices, Cerner and Epic to single source Epic, on-prem JBoss to OpenShift, and OpenShift to AWS'
+      - 'Mentored junior developers through onboarding, code reviews and pair programming sessions, improving team velocity'
 
 education:
   - institution: Western Michigan University
@@ -96,5 +96,5 @@ certifications:
   - title: Epic Chronicles Database & Interconnect Programmer Certification
 
 projects:
-  - "Developed AI-powered sports prediction model using Azure ML and .NET, achieving projected 10% ROI on NCAA Tournament predictions"
-  - "Built this resume site using Jekyll, Jest, Playwright, Puppeteer, and Lighthouse CI for performance, accessibility, and visual regression testing along with GitHub Actions for CI/CD"
+  - 'Developed AI-powered sports prediction model using Azure ML and .NET, achieving projected 10% ROI on NCAA Tournament predictions'
+  - 'Built this resume site using Jekyll, Jest, Playwright, Puppeteer, and Lighthouse CI for performance, accessibility, and visual regression testing along with GitHub Actions for CI/CD'
