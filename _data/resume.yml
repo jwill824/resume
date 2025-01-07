@@ -28,7 +28,7 @@ skills:
     items: REST APIs, SOAP, Apache Camel, Apache Kafka, GraphQL, RPC, Message Queues, Event-Driven Architecture
 
   - category: Web Technologies
-    items: Blazor WASM, ASP.NET Core, Vanilla JS, Angular, React, HTML/CSS, Bootstrap JS, Node, NPM, Yarn, Babel, Jekyll
+    items: Blazor WASM, ASP.NET Core, Vanilla JS, Angular, React, HTML/CSS, Bootstrap JS, NextJS, Node, NPM, Yarn, Babel, Jekyll
 
   - category: Data & Testing
     items: SQL Server, Oracle DB, MySQL, Cloud Storage, ElSql, Entity Framework, Spring Boot JDBC/JPA, Hibernate, xUnit, BUnit, JUnit, Karate, Cucumber, Jest
@@ -47,6 +47,7 @@ experience:
       - "Designed and implemented shared GitHub Actions repository for consistent CI/CD pipelines across DotNet, Java, Angular, and Python codebases, reducing pipeline creation time by 50%"
       - "Implemented Terraform infrastructure as code for GitHub repositories, automating environment-level secrets provisioning and significantly reducing manual configuration"
       - "Enhanced security compliance by architecting by-environment service account PAT rotation for GitHub Actions"
+      - "Partnered on Java 11 to 17 migration initiative, coordinating with an architects to ensure migration success and fallback strategies"
 
   - company: Leading EDJE  
     client: Leaf Home Solutions
@@ -55,10 +56,11 @@ experience:
     achievements:
       - "Ramped up on Blazor WebAssembly and Azure DevOps within 1 month to deliver production-ready code"
       - "Worked on a lean scrum team in architecting and developing a Blazor WebAssembly job installer application managing 1000+ daily work orders"
-      - "Helped implement the Jobs API microservice in Azure Functions which communicated with on-prem stored procedures, processing 10K+ daily requests with 99.9% success rate"
+      - "Helped implement the Jobs API microservice in Azure Functions which communicated with on-prem SQL Server stored procedures, processing 10K+ daily requests with 99.9% success rate"
       - "Established comprehensive testing practices including bUnit, xUnit, and end-to-end tests achieving above baseline code coverage"
       - "Integrated NetSuite ERP with legacy ASP.NET Operations application, saving significant manual entry resources"
       - "Collaborated with business stakeholders to adapt to rapidly changing requirements while maintaining project timeline and quality"
+      - "Quickly dived into working on Logic Apps to automate logistics file processing via sftp, reducing manual errors and improving data accuracy"
 
   - company: Leading EDJE
     client: Crown Equipment
@@ -80,7 +82,7 @@ experience:
       - "Implemented transaction outbox pattern for reliable insurance claims processing"
       - "Achieved Epic certifications contributing to Gold Partner status and reduced partner costs"
       - "Helped develop patient communication and new patient login features for rapid COVID-19 response"
-      - "Helped orchestrate multiple organization changes and migrations including SOAP to REST Java microservices, Cerner and Epic to single source Epic, on-prem JBoss to OpenShift, and OpenShift to AWS"
+      - "Adjusted through multiple organization changes and helped on migrations including SOAP to REST Java microservices, Cerner and Epic to single source Epic, on-prem JBoss to OpenShift, and OpenShift to AWS"
       - "Mentored junior developers through onboarding, code reviews and pair programming sessions, improving team velocity"
 
 education:
@@ -95,3 +97,4 @@ certifications:
 
 projects:
   - "Developed AI-powered sports prediction model using Azure ML and .NET, achieving projected 10% ROI on NCAA Tournament predictions"
+  - "Built this resume site using Jekyll, Jest, Puppeteer, and Lighthouse CI for performance, accessibility, and visual regression testing along with GitHub Actions for CI/CD"

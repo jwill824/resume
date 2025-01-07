@@ -63,7 +63,9 @@ jobs:
         run: node tests/accessibility.js
 
       - name: Run visual regression tests
-        run: node tests/visual-regression.js
+        run: |
+          node tests/visual-regression.js
+          npx playwright install 
 
       - name: Upload test results
         if: always()
