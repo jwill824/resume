@@ -25,7 +25,8 @@ jobs:
 
       - name: Lint JavaScript
         run: |
-          eslint ./assets/js/**/*.js
+          eslint ./scripts/**/*.js
+          eslint ./tests/**/*.js
           prettier --check .
 
       - name: Lint Markdown

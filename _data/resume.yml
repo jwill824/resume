@@ -22,7 +22,7 @@ skills:
     items: Azure DevOps (Console, CLI), AWS (Console, CLI), OpenShift, Kubernetes, Docker, Terraform, VM Management
 
   - category: CI/CD & DevOps
-    items: GitHub Actions, Jenkins, Azure DevOps, SonarQube, Dynatrace, OpenSearch, Canary Deployments
+    items: GitHub Actions, Jenkins, Azure DevOps, SonarQube, Dynatrace, OpenSearch, Blue/Green Deployments, Canary Releases
 
   - category: Integration & Messaging
     items: REST APIs, SOAP, Apache Camel, Apache Kafka, GraphQL, RPC, Message Queues, Event-Driven Architecture

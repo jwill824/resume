@@ -36,6 +36,12 @@ jobs:
           npm ci
           npm install jest @testing-library/jest-dom @testing-library/dom puppeteer axe-core lighthouse
           npm install --save-dev jest-environment-jsdom
+          npm install -D @playwright/test
+
+      - name: Install Playwright and browsers
+        run: |
+          npx playwright install
+          npx playwright install-deps
 
       - name: Run Tests
         run: npm test
@@ -63,9 +69,7 @@ jobs:
         run: node tests/accessibility.js
 
       - name: Run visual regression tests
-        run: |
-          node tests/visual-regression.js
-          npx playwright install 
+        run: node tests/visual-regression.js
 
       - name: Upload test results
         if: always()
