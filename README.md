@@ -1,10 +1,12 @@
 # Personal Resume Site
 
-A Jekyll-based resume website with automated PDF generation, dynamic skill years calculation, comprehensive testing, and GitHub Pages deployment.
+A Jekyll-based resume website with automated PDF generation, dynamic skill
+years calculation, comprehensive testing, and GitHub Pages deployment.
 
 ## 🎯 Overview
 
-This repository contains my professional resume, built using Jekyll and automatically deployed to GitHub Pages. It features:
+This repository contains my professional resume, built using Jekyll and
+automatically deployed to GitHub Pages. It features:
 
 - Responsive design with SCSS
 - Automated PDF generation with proper styling
@@ -15,7 +17,7 @@ This repository contains my professional resume, built using Jekyll and automati
 
 ## 🏗️ Repository Structure
 
-```
+```text
 resume/
 ├── .github/
 │   └── workflows/
@@ -211,7 +213,8 @@ npm run test:watch
 
 ### Using Dev Container (Recommended)
 
-This project includes a dev container configuration for VS Code that sets up all necessary dependencies automatically. To use it:
+This project includes a dev container configuration for VS Code that sets up
+all necessary dependencies automatically. To use it:
 
 1. Install [VS Code](https://code.visualstudio.com/) and the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 2. Clone this repository
@@ -229,66 +232,66 @@ If not using the dev container, you'll need to install dependencies manually:
 
 1. Install Ruby and development tools:
 
-```bash
-# Ubuntu/Debian
-sudo apt-get update
-sudo apt-get install ruby-full build-essential zlib1g-dev
+   ```bash
+   # Ubuntu/Debian
+   sudo apt-get update
+   sudo apt-get install ruby-full build-essential zlib1g-dev
 
-# Add Ruby paths to your shell
-echo 'export GEM_HOME="$HOME/gems"' >> ~/.bashrc
-echo 'export PATH="$HOME/gems/bin:$PATH"' >> ~/.bashrc
-source ~/.bashrc
-```
+   # Add Ruby paths to your shell
+   echo 'export GEM_HOME="$HOME/gems"' >> ~/.bashrc
+   echo 'export PATH="$HOME/gems/bin:$PATH"' >> ~/.bashrc
+   source ~/.bashrc
+   ```
 
 2. Install Jekyll and Bundler:
 
-```bash
-gem install jekyll bundler
-```
+   ```bash
+   gem install jekyll bundler
+   ```
 
 3. Install system dependencies for testing:
 
-```bash
-sudo apt-get install -y \
-    libgbm-dev \
-    libatk1.0-0 \
-    libatk-bridge2.0-0 \
-    libcups2 \
-    libdrm2 \
-    libxkbcommon0 \
-    libxcomposite1 \
-    libxdamage1 \
-    libxfixes3 \
-    libxrandr2 \
-    libgbm1 \
-    libasound2
-```
+   ```bash
+   sudo apt-get install -y \
+      libgbm-dev \
+      libatk1.0-0 \
+      libatk-bridge2.0-0 \
+      libcups2 \
+      libdrm2 \
+      libxkbcommon0 \
+      libxcomposite1 \
+      libxdamage1 \
+      libxfixes3 \
+      libxrandr2 \
+      libgbm1 \
+      libasound2
+   ```
 
 4. Install project dependencies:
 
-```bash
-# Ruby dependencies
-bundle install
+   ```bash
+   # Ruby dependencies
+   bundle install
 
-# Node.js dependencies
-npm install
+   # Node.js dependencies
+   npm install
 
-# Playwright browser
-npx playwright install chromium
-```
+   # Playwright browser
+   npx playwright install chromium
+   ```
 
-### Local Development
+   ### Local Development
 
-```bash
-# Start Jekyll server
-bundle exec jekyll serve
+   ```bash
+   # Start Jekyll server
+   bundle exec jekyll serve
 
-# Build site
-bundle exec jekyll build
+   # Build site
+   bundle exec jekyll build
 
-# Run tests in watch mode
-npm run test:watch
-```
+   # Run tests in watch mode
+   npm run test:watch
+   ```
 
 ## 🔍 Troubleshooting
 
