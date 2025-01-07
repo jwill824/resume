@@ -2,7 +2,6 @@ import puppeteer from 'puppeteer';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import { join } from 'path';
 
 // Get the current file's directory
 const __filename = fileURLToPath(import.meta.url);
