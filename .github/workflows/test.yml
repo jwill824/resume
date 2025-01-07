@@ -36,12 +36,20 @@ jobs:
           npm ci
           npm install jest @testing-library/jest-dom @testing-library/dom puppeteer axe-core lighthouse
           npm install --save-dev jest-environment-jsdom
-          npm install -D @playwright/test
+          npm install -D @playwright/test pngjs pixelmatch
 
       - name: Install Playwright and browsers
         run: |
-          npx playwright install
-          npx playwright install-deps
+          npx playwright install chromium
+          npx playwright install-deps chromium
+
+      # Download baseline if it exists
+      - name: Download baseline image
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: visual-regression-baseline
+          path: tests/
 
       - name: Run Tests
         run: npm test
@@ -68,9 +76,20 @@ jobs:
       - name: Run accessibility tests
         run: node tests/accessibility.js
 
+      # Run visual regression tests
       - name: Run visual regression tests
         run: node tests/visual-regression.js
 
+      # Upload the baseline for future runs if it was created
+      - name: Upload baseline image
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-regression-baseline
+          path: tests/baseline.png
+          retention-days: 1
+
+      # Upload test results including diffs
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
@@ -79,3 +98,4 @@ jobs:
           path: |
             tests/results
             .lighthouseci
+          retention-days: 1

@@ -97,4 +97,4 @@ certifications:
 
 projects:
   - "Developed AI-powered sports prediction model using Azure ML and .NET, achieving projected 10% ROI on NCAA Tournament predictions"
-  - "Built this resume site using Jekyll, Jest, Puppeteer, and Lighthouse CI for performance, accessibility, and visual regression testing along with GitHub Actions for CI/CD"
+  - "Built this resume site using Jekyll, Jest, Playwright, Puppeteer, and Lighthouse CI for performance, accessibility, and visual regression testing along with GitHub Actions for CI/CD"

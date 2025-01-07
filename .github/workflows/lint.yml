@@ -14,29 +14,32 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
 
-      - name: Install Node.js linters
+      - name: Install dependencies
         run: |
-          npm install -g markdownlint-cli
-          npm install -g eslint
-          npm install -g prettier
-          npm install -g yaml-lint
-          npm install -g sass-lint
+          npm install
+          npm install -g markdownlint-cli prettier yaml-lint sass-lint
+          npm install -D eslint eslint-plugin-jest html-validate
 
       - name: Lint JavaScript
         run: |
-          eslint ./scripts/**/*.js
-          eslint ./tests/**/*.js
-          prettier --check .
+          npx eslint ./scripts/**/*.js --max-warnings 0
+          npx eslint ./tests/**/*.js --max-warnings 0
+          npx prettier --check .
 
       - name: Lint Markdown
-        run: markdownlint '**/*.md'
+        run: |
+          markdownlint '**/*.md' --ignore node_modules/
 
       - name: Lint YAML
-        run: yamllint .
-
+        run: |
+          yamllint -c .yamllint.yml .
+          
       - name: Lint SCSS
-        run: sass-lint -v -q
+        run: |
+          sass-lint '_sass/**/*.scss' -v -q
 
       - name: Validate HTML
-        run: npx html-validate _site/**/*.html
+        run: |
+          npx html-validate "_site/**/*.html"
