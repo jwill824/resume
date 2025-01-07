@@ -6,7 +6,5 @@ _site/
 vendor/
 node_modules/
 Gemfile.lock
-package-lock.json
-package.json
 .DS_Store
 tests/results/
