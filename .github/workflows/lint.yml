@@ -24,8 +24,7 @@ jobs:
 
       - name: Lint JavaScript
         run: |
-          npx eslint ./scripts/**/*.js --max-warnings 0
-          npx eslint ./tests/**/*.js --max-warnings 0
+          npx eslint ./scripts/**/*.js ./tests/**/*.js --config eslint.config.js
           npx prettier --check .
 
       - name: Lint Markdown

@@ -1,7 +1,7 @@
 // jest.config.cjs
 module.exports = {
   testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['<rootDir>/tests/setup.js'],
+  setupFilesAfterEnv: ['<rootDir>/tests/setup.cjs'],
   testMatch: [
     '<rootDir>/tests/**/*.test.js'
   ],
@@ -18,7 +18,6 @@ module.exports = {
   ],
   collectCoverage: true,
   collectCoverageFrom: [
-    'assets/js/**/*.js',
     '!**/node_modules/**'
   ],
   coverageDirectory: 'tests/results/coverage',

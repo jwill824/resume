@@ -11,11 +11,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 async function runVisualTests() {
+    let browser;
     try {
         // Ensure site is built
         await setup();
 
-        const browser = await chromium.launch({
+        browser = await chromium.launch({
             args: ['--no-sandbox', '--disable-setuid-sandbox']
         });
 
@@ -63,11 +64,16 @@ async function runVisualTests() {
                 console.log(`Baseline: ${baseline.width}x${baseline.height}`);
                 console.log(`Current:  ${current.width}x${current.height}`);
 
-                // If dimensions are different, create new baseline
+                if (process.env.CI) {
+                    console.log('Dimensions changed in CI environment - failing test');
+                    process.exit(1);
+                }
+
+                // In local development, update the baseline
                 console.log('Dimensions have changed - updating baseline...');
                 fs.copyFileSync(currentPath, baselinePath);
                 console.log('Baseline updated. Please review the changes.');
-                return;
+                process.exit(0);
             }
 
             const diff = new PNG({ width: baseline.width, height: baseline.height });
@@ -93,7 +99,10 @@ async function runVisualTests() {
             const totalPixels = baseline.width * baseline.height;
             const diffPercentage = (numDiffPixels / totalPixels) * 100;
 
-            if (diffPercentage > 1) { // 1% threshold
+            // Stricter threshold in CI
+            const threshold = process.env.CI ? 0.1 : 1;
+
+            if (diffPercentage > threshold) {
                 console.error(`Visual differences detected (${diffPercentage.toFixed(2)}% different)`);
                 console.error(`Diff image saved to: ${diffPath}`);
                 process.exit(1);
@@ -101,17 +110,29 @@ async function runVisualTests() {
                 console.log(`Visual comparison passed! ${diffPercentage.toFixed(2)}% difference`);
             }
         } else {
-            // Create baseline if it doesn't exist
+            // No baseline exists
             console.log('No baseline found, creating one...');
             fs.copyFileSync(currentPath, baselinePath);
-            console.log(`Baseline created at: ${baselinePath}`);
-        }
 
-        await browser.close();
+            if (process.env.CI) {
+                console.log('Created baseline in CI environment - failing test');
+                process.exit(1);
+            } else {
+                console.log(`Baseline created at: ${baselinePath}`);
+                process.exit(0);
+            }
+        }
     } catch (error) {
         console.error('Error running visual tests:', error);
         process.exit(1);
+    } finally {
+        if (browser) {
+            await browser.close();
+        }
     }
+
+    // Only reach here if tests pass
+    process.exit(0);
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
