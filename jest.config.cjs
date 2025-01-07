@@ -25,6 +25,8 @@ module.exports = {
   coverageReporters: ['text', 'lcov', 'html'],
   verbose: true,
   // Remove extensionsToTreatAsEsm since we're using "type": "module"
-  transformIgnorePatterns: [],
+  transformIgnorePatterns: [
+    'node_modules/(?!(puppeteer)/)'
+  ],
   moduleFileExtensions: ['js', 'jsx', 'json', 'node']
 };

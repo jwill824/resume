@@ -1,13 +1,7 @@
 import puppeteer from 'puppeteer';
 import { readFileSync } from 'fs';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 
-// Get the current file's directory
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-(async () => {
+async function generatePDF() {
     try {
         const browser = await puppeteer.launch({
             headless: "new",
@@ -16,24 +10,19 @@ const __dirname = dirname(__filename);
 
         const page = await browser.newPage();
 
-        // Set viewport first
         await page.setViewport({
             width: 1200,
             height: 800
         });
 
-        // Read the CSS file content
         const cssContent = readFileSync('_site/assets/css/styles.css', 'utf8');
 
-        // Navigate to the HTML file
         await page.goto(`file:${process.cwd()}/_site/index.html`, {
             waitUntil: ['networkidle0', 'domcontentloaded']
         });
 
-        // Inject styles directly into the page
         await page.addStyleTag({ content: cssContent });
 
-        // Use evaluate to ensure everything is loaded
         await page.evaluate(() => {
             return new Promise((resolve) => {
                 if (document.readyState === 'complete') {
@@ -44,7 +33,6 @@ const __dirname = dirname(__filename);
             });
         });
 
-        // Generate PDF with proper settings
         await page.pdf({
             path: '_site/resume.pdf',
             format: 'A4',
@@ -64,4 +52,12 @@ const __dirname = dirname(__filename);
         console.error('Error generating PDF:', error);
         process.exit(1);
     }
-})();
+}
+
+// Export the function
+export default generatePDF;
+
+// Run if called directly from command line
+if (process.argv[1]?.endsWith('generate-pdf.js')) {
+    generatePDF();
+}

@@ -28,10 +28,10 @@ skills:
     items: REST APIs, SOAP, Apache Camel, Apache Kafka, GraphQL, RPC, Message Queues, Event-Driven Architecture
 
   - category: Web Technologies
-    items: Blazor WASM, ASP.NET Core, Angular, React, HTML/CSS, Bootstrap
+    items: Blazor WASM, ASP.NET Core, Vanilla JS, Angular, React, HTML/CSS, Bootstrap JS, Node, NPM, Yarn, Babel, Jekyll
 
   - category: Data & Testing
-    items: SQL Server, Oracle DB, MySQL, Cloud Storage, ElSql, Entity Framework, Spring Boot JDBC/JPA, Hibernate, xUnit, BUnit, JUnit, Karate, Cucumber
+    items: SQL Server, Oracle DB, MySQL, Cloud Storage, ElSql, Entity Framework, Spring Boot JDBC/JPA, Hibernate, xUnit, BUnit, JUnit, Karate, Cucumber, Jest
 
   - category: Tools & Methodologies
     items: Postman, GitHub, Bitbucket, Confluence, Teams, Slack, Agile/Scrum, Jira,  SOLID, TDD, BDD, Pair Programming
