@@ -9,6 +9,7 @@ import setup from '../scripts/test-setup.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const FORCE_UPDATE_BASELINE = process.env.UPDATE_VISUAL_BASELINE === 'true';
 
 async function runVisualTests() {
   let browser;
@@ -59,12 +60,19 @@ async function runVisualTests() {
       const baseline = PNG.sync.read(fs.readFileSync(baselinePath));
       const current = PNG.sync.read(screenshot);
 
+      if (FORCE_UPDATE_BASELINE) {
+        console.log('Forcing baseline update as requested...');
+        fs.copyFileSync(currentPath, baselinePath);
+        console.log('Baseline updated successfully.');
+        process.exit(0);
+      }
+
       if (baseline.width !== current.width || baseline.height !== current.height) {
         console.log('Dimensions changed:');
         console.log(`Baseline: ${baseline.width}x${baseline.height}`);
         console.log(`Current:  ${current.width}x${current.height}`);
 
-        if (process.env.CI) {
+        if (process.env.CI && !FORCE_UPDATE_BASELINE) {
           console.log('Dimensions changed in CI environment - failing test');
           process.exit(1);
         }

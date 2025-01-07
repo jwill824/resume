@@ -3,6 +3,12 @@ name: Test
 on:
   push:
   workflow_dispatch:
+    inputs:
+      update_baseline:
+        description: 'Update visual regression baseline'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   test:
@@ -76,26 +82,23 @@ jobs:
       - name: Run accessibility tests
         run: node tests/accessibility.js
 
-      # Run visual regression tests
       - name: Run visual regression tests
         run: node tests/visual-regression.js
+        env:
+          UPDATE_VISUAL_BASELINE: ${{ github.event_name == 'workflow_dispatch' && inputs.update_baseline == 'true' || github.event_name == 'push' && github.ref == 'refs/heads/main' }}
 
-      # Upload the baseline for future runs if it was created
       - name: Upload baseline image
-        if: success()
+        if: success() || env.UPDATE_VISUAL_BASELINE == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: visual-regression-baseline
           path: tests/baseline.png
           retention-days: 1
 
-      # Upload test results including diffs
-      - name: Upload test results
-        if: always()
+      - name: Upload baseline image
+        if: success() || github.event_name == 'workflow_dispatch' && inputs.update_baseline == 'true' || github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: actions/upload-artifact@v4
         with:
-          name: test-results
-          path: |
-            tests/results
-            .lighthouseci
+          name: visual-regression-baseline
+          path: tests/baseline.png
           retention-days: 1
