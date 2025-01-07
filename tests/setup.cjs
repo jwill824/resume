@@ -8,15 +8,15 @@ global.TextDecoder = TextDecoder;
 
 // Mock the window.fs API that's available in the browser environment
 global.window = {
-  fs: {
-    readFile: jest.fn(),
-  },
+    fs: {
+        readFile: jest.fn(),
+    },
 };
 
 // Setup any other global mocks or configurations needed for tests
 jest.mock('fs', () => ({
-  existsSync: jest.fn(),
-  mkdirSync: jest.fn(),
-  writeFileSync: jest.fn(),
-  readFileSync: jest.fn(),
+    existsSync: jest.fn(),
+    mkdirSync: jest.fn(),
+    writeFileSync: jest.fn(),
+    readFileSync: jest.fn(),
 }));
