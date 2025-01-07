@@ -49,6 +49,14 @@ jobs:
       - name: Generate PDF
         run: node scripts/generate-pdf.js
 
+      - name: Verify PDF Generation
+        run: |
+          if [ ! -f "_site/resume.pdf" ]; then
+              echo "PDF was not generated!"
+              exit 1
+          fi
+          echo "PDF was generated successfully"
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
