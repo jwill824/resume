@@ -1,31 +1,15 @@
-@use 'sass:math';
-@use 'sass:color';
-
-// Print-specific variables
-$print-font-body: 11pt;
-$print-font-h1: 18pt;
-$print-font-h2: 14pt;
-$print-margin: 20mm;
-$print-spacing-sm: 4pt;
-$print-spacing-md: 8pt;
-$print-spacing-lg: 12pt;
-$print-spacing-xl: 16pt;
-$print-text-dark: #333;
-
+// _print.scss
 @media print {
-  // Page setup
   @page {
     size: A4;
     margin: $print-margin;
   }
 
-  // Global print adjustments
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
-  // Basic document setup
   html,
   body {
     width: 210mm;
@@ -34,7 +18,6 @@ $print-text-dark: #333;
     font-size: $print-font-body;
   }
 
-  // Container adjustments
   .container {
     width: 100%;
     max-width: none !important;
@@ -43,79 +26,24 @@ $print-text-dark: #333;
     box-shadow: none !important;
   }
 
-  // Header styles
   header {
     .download-container {
       display: none !important;
     }
-
-    h1 {
-      font-size: $print-font-h1;
-      margin-bottom: $print-spacing-md;
-    }
-
-    .contact-info {
-      margin-bottom: $print-spacing-lg;
-    }
   }
 
-  // Section headings
   h2 {
-    font-size: $print-font-h2;
-    margin-top: $print-spacing-lg;
-    padding-bottom: $print-spacing-sm;
     break-after: avoid;
   }
 
-  // Skills section
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(2, math.div(100%, 2));
-    gap: $print-spacing-md;
+  .experience-item,
+  .project-item,
+  .education-item {
     break-inside: avoid;
-
-    .skill-category {
-      break-inside: avoid;
-    }
-
-    .years {
-      color: color.adjust($print-text-dark, $lightness: 20%) !important;
-    }
   }
 
-  // Experience section
-  .experience-item {
-    break-inside: avoid;
-    margin-bottom: $print-spacing-lg;
-
-    .experience-header {
-      margin-bottom: $print-spacing-sm;
-    }
-
-    ul {
-      margin-top: $print-spacing-sm;
-      padding-left: $print-spacing-xl;
-
-      li {
-        margin-bottom: $print-spacing-sm;
-        break-inside: avoid;
-      }
-    }
-  }
-
-  // Links
   a {
-    text-decoration: none;
     color: $print-text-dark !important;
-  }
-
-  // Page break controls
-  #summary,
-  #skills,
-  #experience,
-  #education,
-  #certifications,
-  #projects {
-    break-inside: avoid-start;
+    text-decoration: none;
   }
 }

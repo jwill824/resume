@@ -1,0 +1,21 @@
+// _responsive.scss
+@media (max-width: 600px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .experience-header {
+    .company-line {
+      flex-direction: column;
+      gap: 0.25rem;
+
+      .role {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+}

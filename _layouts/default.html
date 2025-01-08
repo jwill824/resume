@@ -1,57 +1,24 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ site.data.resume.contact.name }} | {{ site.data.resume.contact.title }}</title>
-    <meta name="description" content="Professional resume of {{ site.data.resume.contact.name }}" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}" />
-    {% seo title=false %}
-  </head>
 
-  <body>
-    <div class="container">
-      <header role="banner">
-        <h1>{{ site.data.resume.contact.name }}</h1>
-        <div class="contact-info">
-          <span
-            >{{ site.data.resume.contact.title }} | {{ site.data.resume.contact.location }}</span
-          >
-          <br />
-          <span class="contact-links">
-            <a href="mailto:{{ site.data.resume.contact.email }}" aria-label="Email"
-              >{{ site.data.resume.contact.email }}</a
-            >
-            |
-            <a
-              href="https://www.linkedin.com/in/{{ site.data.resume.contact.linkedin }}"
-              aria-label="LinkedIn Profile"
-              >LinkedIn</a
-            >
-            {% if site.data.resume.contact.github %} |
-            <a
-              href="https://github.com/{{ site.data.resume.contact.github }}"
-              aria-label="GitHub Profile"
-              >GitHub</a
-            >
-            {% endif %}
-          </span>
-        </div>
-        <div class="download-container screen-only">
-          <a href="resume.pdf" class="download-button" download>Download PDF</a>
-        </div>
-      </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ site.data.resume.contact.name }} | {{ site.data.resume.contact.title }}</title>
+  <meta name="description" content="Professional resume of {{ site.data.resume.contact.name }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}" />
+  {% seo title=false %}
+</head>
 
-      <main role="main">{{ content }}</main>
+<body>
+  <main role="main">{{ content }}</main>
 
-      <footer role="contentinfo" class="print-only">
-        <p>Last updated: {{ site.time | date: '%B %Y' }}</p>
-      </footer>
-    </div>
-  </body>
+  <footer role="contentinfo" class="print-only">
+    <p>Last updated: {{ site.time | date: '%B %Y' }}</p>
+  </footer>
+  </div>
+</body>
+
 </html>

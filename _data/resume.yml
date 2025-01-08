@@ -6,36 +6,6 @@ contact:
   linkedin: jeffrey-williams-2639576a
   github: jwill824
 
-summary: >
-  Software Engineer with extensive experience in .NET and Java enterprise applications development, including financial and insurance systems.
-  Proven track record of delivering secure and scalable solutions. Expert in developing maintainable software with comprehensive testing practices and a 
-  strong focus on security compliance and operational excellence.
-
-skills:
-  - category: Core Technologies
-    items: C# (ASP/.NET Core), Java (Spring Boot), JavaScript/TypeScript, Python
-
-  - category: Security & Protocols
-    items: OAuth 2.0, SSL/TLS, HIPAA Compliance, Data Encryption, Audit Logging
-
-  - category: Cloud & Infrastructure
-    items: Azure DevOps (Console, CLI), AWS (Console, CLI), OpenShift, Kubernetes, Docker, Terraform, VM Management
-
-  - category: CI/CD & DevOps
-    items: GitHub Actions, Jenkins, Azure DevOps, SonarQube, Dynatrace, OpenSearch, Blue/Green Deployments, Canary Releases
-
-  - category: Integration & Messaging
-    items: REST APIs, SOAP, Apache Camel, Apache Kafka, GraphQL, RPC, Message Queues, Event-Driven Architecture
-
-  - category: Web Technologies
-    items: Blazor WASM, ASP.NET Core, Vanilla JS, Angular, React, HTML/CSS, Bootstrap JS, NextJS, Node, NPM, Yarn, Babel, Jekyll
-
-  - category: Data & Testing
-    items: SQL Server, Oracle DB, MySQL, Cloud Storage, ElSql, Entity Framework, Spring Boot JDBC/JPA, Hibernate, xUnit, BUnit, JUnit, Karate, Cucumber, Jest
-
-  - category: Tools & Methodologies
-    items: Postman, GitHub, Bitbucket, Confluence, Teams, Slack, Agile/Scrum, Jira,  SOLID, TDD, BDD, Pair Programming
-
 experience:
   - company: Leading EDJE
     client: Crown Equipment
@@ -85,6 +55,22 @@ experience:
       - 'Adjusted through multiple organization changes and helped on migrations including SOAP to REST Java microservices, Cerner and Epic to single source Epic, on-prem JBoss to OpenShift, and OpenShift to AWS'
       - 'Mentored junior developers through onboarding, code reviews and pair programming sessions, improving team velocity'
 
+skills:
+  core_technologies: 'C# (ASP/.NET Core), Java (Spring Boot), JavaScript/TypeScript, Python'
+  cloud_and_devops: 'Azure DevOps, AWS, GitHub Actions, Jenkins, Terraform, Docker, Kubernetes'
+  web_and_api: 'Blazor WASM, ASP.NET Core, REST APIs, GraphQL, Angular, React'
+  security: 'OAuth 2.0, SSL/TLS, HIPAA Compliance, Data Encryption'
+  data_and_testing: 'SQL Server, MySQL, Entity Framework, xUnit, JUnit, Karate'
+
+projects:
+  - name: AI Sports Prediction Model
+    description: 'Developed AI-powered sports prediction model using Azure ML and .NET, achieving projected 10% ROI on NCAA Tournament predictions'
+    technologies: 'Azure ML, .NET, Machine Learning'
+    
+  - name: Resume Portfolio Site
+    description: 'Built this resume site using Jekyll, Jest, Playwright, Puppeteer, and Lighthouse CI for performance, accessibility, and visual regression testing along with GitHub Actions for CI/CD'
+    technologies: 'Jekyll, JavaScript, GitHub Actions'
+
 education:
   - institution: Western Michigan University
     degree: Bachelor of Science in Computer Science
@@ -94,7 +80,3 @@ certifications:
   - title: Microsoft Certified - Azure Fundamentals
   - title: AWS Partner - Technical Accreditation
   - title: Epic Chronicles Database & Interconnect Programmer Certification
-
-projects:
-  - 'Developed AI-powered sports prediction model using Azure ML and .NET, achieving projected 10% ROI on NCAA Tournament predictions'
-  - 'Built this resume site using Jekyll, Jest, Playwright, Puppeteer, and Lighthouse CI for performance, accessibility, and visual regression testing along with GitHub Actions for CI/CD'
