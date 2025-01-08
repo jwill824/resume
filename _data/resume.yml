@@ -69,7 +69,7 @@ projects:
     
   - name: Resume Portfolio Site
     description: 'Built this resume site using Jekyll, Jest, Playwright, Puppeteer, and Lighthouse CI for performance, accessibility, and visual regression testing along with GitHub Actions for CI/CD'
-    technologies: 'Jekyll, JavaScript, GitHub Actions'
+    technologies: 'Jekyll, JavaScript, SCSS, GitHub Actions'
 
 education:
   - institution: Western Michigan University
