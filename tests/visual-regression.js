@@ -5,7 +5,7 @@ import path from 'path';
 import { PNG } from 'pngjs';
 import pixelmatch from 'pixelmatch';
 import { fileURLToPath } from 'url';
-import setup from '../scripts/test-setup.js';
+import setup from './test-setup.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -34,7 +34,7 @@ async function runVisualTests() {
     }
 
     // Navigate to the page and wait for content
-    await page.goto('file://' + indexPath);
+    await page.goto(`file://${indexPath}`);
     await page.waitForSelector('.container', { timeout: 5000 });
 
     // Take a screenshot

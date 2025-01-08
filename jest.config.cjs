@@ -9,13 +9,13 @@ module.exports = {
   transform: {
     '^.+\\.jsx?$': ['babel-jest', { configFile: './babel.config.cjs' }],
   },
-  testPathIgnorePatterns: ['/node_modules/', '/_site/', '/vendor/'],
+  testPathIgnorePatterns: ['/node_modules/'],
   collectCoverage: true,
   collectCoverageFrom: ['!**/node_modules/**'],
   coverageDirectory: 'tests/results/coverage',
   coverageReporters: ['text', 'lcov', 'html'],
+  coveragePathIgnorePatterns: ['<rootDir>/_site/', '<rootDir>/vendor/', '<rootDir>/tests/'],
   verbose: true,
-  // Remove extensionsToTreatAsEsm since we're using "type": "module"
   transformIgnorePatterns: ['node_modules/(?!(puppeteer)/)'],
   moduleFileExtensions: ['js', 'jsx', 'json', 'node'],
 };

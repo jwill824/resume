@@ -280,18 +280,18 @@ If not using the dev container, you'll need to install dependencies manually:
    npx playwright install chromium
    ```
 
-   ### Local Development
+### Local Development
 
-   ```bash
-   # Start Jekyll server
-   bundle exec jekyll serve
+```bash
+# Start Jekyll server
+bundle exec jekyll serve
 
-   # Build site
-   bundle exec jekyll build
+# Build site
+bundle exec jekyll build
 
-   # Run tests in watch mode
-   npm run test:watch
-   ```
+# Run tests in watch mode
+npm run test:watch
+```
 
 ## 🔍 Troubleshooting
 

@@ -15,7 +15,7 @@ async function generatePDF() {
       height: 800,
     });
 
-    const cssContent = readFileSync('_site/assets/css/styles.css', 'utf8');
+    const cssContent = readFileSync('_site/assets/css/styles.scss', 'utf8');
 
     await page.goto(`file:${process.cwd()}/_site/index.html`, {
       waitUntil: ['networkidle0', 'domcontentloaded'],

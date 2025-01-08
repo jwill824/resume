@@ -1,0 +1,39 @@
+{
+  "$schema": "./node_modules/rome/configuration_schema.json",
+  "formatter": {
+    "enabled": true,
+    "indentSize": 2,
+    "indentStyle": "space",
+    "lineWidth": 100
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "trailingComma": "es5"
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "style": {
+        "noImplicitBoolean": "error",
+        "useBlockStatements": "error",
+        "useTemplate": "error"
+      },
+      "suspicious": {
+        "noExplicitAny": "error",
+        "noPrototypeBuiltins": "error"
+      }
+    }
+  },
+  "files": {
+    "ignore": [
+      "node_modules/**/*",
+      "_site/**/*",
+      "vendor/**/*",
+      "tests/results/**/*",
+      "assets/**/*"
+    ]
+  }
+}

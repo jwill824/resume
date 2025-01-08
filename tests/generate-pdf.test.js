@@ -89,7 +89,7 @@ describe('PDF Generation', () => {
   it('should read and inject CSS correctly', async () => {
     await generatePDF();
 
-    expect(readFileSync).toHaveBeenCalledWith('_site/assets/css/styles.css', 'utf8');
+    expect(readFileSync).toHaveBeenCalledWith('_site/assets/css/styles.scss', 'utf8');
 
     expect(mockPage.addStyleTag).toHaveBeenCalledWith({
       content: 'mock-css-content',

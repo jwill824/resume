@@ -13,11 +13,14 @@
 </head>
 
 <body>
-  <main role="main">{{ content }}</main>
+  <div class="container">
 
-  <footer role="contentinfo" class="print-only">
-    <p>Last updated: {{ site.time | date: '%B %Y' }}</p>
-  </footer>
+    <main role="main">{{ content }}</main>
+
+    <footer role="contentinfo" class="print-only">
+      <p>Last updated: {{ site.time | date: '%B %Y' }}</p>
+    </footer>
+  </div>
 </body>
 
 </html>

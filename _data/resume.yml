@@ -56,16 +56,18 @@ experience:
       - 'Mentored junior developers through onboarding, code reviews and pair programming sessions, improving team velocity'
 
 skills:
-  core_technologies: 'C# (ASP/.NET Core), Java (Spring Boot), JavaScript/TypeScript, Python'
-  cloud_and_devops: 'Azure DevOps, AWS, GitHub Actions, Jenkins, Terraform, Docker, Kubernetes'
-  web_and_api: 'Blazor WASM, ASP.NET Core, REST APIs, GraphQL, Angular, React'
-  security: 'OAuth 2.0, SSL/TLS, HIPAA Compliance, Data Encryption'
-  data_and_testing: 'SQL Server, MySQL, Entity Framework, xUnit, JUnit, Karate'
+  core_technologies: 'C#, DotNet, Java, SpringBoot, JavaScript, TypeScript, Python'
+  cloud_and_devops: 'Azure, AWS, GitHub Actions, Jenkins, Terraform, Docker, Kubernetes, Dynatrace, Splunk, OpenSearch'
+  web_and_api: 'Blazor WASM, ASP.NET Core, REST APIs, GraphQL, Angular, React, HTML, CSS, SCSS'
+  security: 'OAuth 2.0, SSL/TLS, HIPAA Compliance, Data Encryption, ISO'
+  data_and_testing: 'SQL Server, MySQL, Oracle DB, Spring Boot ORMs, Entity Framework ORMs, xUnit, bUnit, JUnit, JUnit, Karate, testcontainers, Jest, Playwright, Puppeteer, Lighthouse CI'
+  methodologies: 'Agile, Scrum, Kanban, TDD, Pair Programming, CI/CD, DevOps, Microservices, SOA'
+  tools: 'Visual Studio, IntelliJ, Eclipse, VS Code, Postman, Swagger, Git, Jira, Confluence, Trello, Slack, Zoom, Microsoft Teams'
 
 projects:
   - name: AI Sports Prediction Model
     description: 'Developed AI-powered sports prediction model using Azure ML and .NET, achieving projected 10% ROI on NCAA Tournament predictions'
-    technologies: 'Azure ML, .NET, Machine Learning'
+    technologies: 'DotNet, Azure ML, .NET, Machine Learning'
     
   - name: Resume Portfolio Site
     description: 'Built this resume site using Jekyll, Jest, Playwright, Puppeteer, and Lighthouse CI for performance, accessibility, and visual regression testing along with GitHub Actions for CI/CD'

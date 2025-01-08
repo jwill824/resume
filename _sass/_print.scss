@@ -1,7 +1,7 @@
 // _print.scss
 @media print {
   @page {
-    size: A4;
+    size: a4;
     margin: $print-margin;
   }
 

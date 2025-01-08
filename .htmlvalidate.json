@@ -1,5 +1,7 @@
 {
-  "extends": ["html-validate:recommended"],
+  "extends": [
+    "html-validate:recommended"
+  ],
   "rules": {
     "void-style": "off",
     "no-trailing-whitespace": "warn",
@@ -7,5 +9,7 @@
     "no-raw-characters": "warn",
     "long-title": "error"
   },
-  "elements": ["html5"]
+  "elements": [
+    "html5"
+  ]
 }
