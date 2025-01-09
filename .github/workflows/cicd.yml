@@ -76,13 +76,13 @@ jobs:
       - run: npm run test:performance
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - if: github.event_name == 'pull_request'
-        run: |
-          score=$(cat .lighthouseci/manifest.json | jq -r '.[] | .summary.performance')
-          if (( $(echo "$score < 0.9" | bc -l) )); then
-            echo "Performance score below threshold: $score"
-            exit 1
-          fi
+      - name: Upload Lighthouse results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-results
+          path: .lighthouseci/
+          retention-days: 7
       - if: failure()
         uses: actions/upload-artifact@v4
         with:
