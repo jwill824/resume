@@ -11,6 +11,7 @@
     "test:setup": "node tests/test-setup.js",
     "test:unit": "jest",
     "test:visual": "node tests/visual-regression.js",
+    "test:visual:init": "CREATE_BASELINE=true node tests/visual-regression.js",
     "test:performance": "lhci autorun",
     "test": "npm run test:setup && npm run test:unit && npm run test:visual",
     "test:watch": "jest --watch"

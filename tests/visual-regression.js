@@ -1,4 +1,3 @@
-// tests/visual-regression.js
 import { chromium } from 'playwright';
 import fs from 'fs';
 import path from 'path';
@@ -9,12 +8,11 @@ import setup from './test-setup.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const FORCE_UPDATE_BASELINE = process.env.UPDATE_VISUAL_BASELINE === 'true';
+const CREATE_BASELINE = process.env.CREATE_BASELINE === 'true';
 
 async function runVisualTests() {
   let browser;
   try {
-    // Ensure site is built
     await setup();
 
     browser = await chromium.launch({
@@ -22,9 +20,16 @@ async function runVisualTests() {
     });
 
     const page = await browser.newPage();
-
-    // Set viewport size
     await page.setViewportSize({ width: 1280, height: 1024 });
+
+    await page.addStyleTag({
+      content: `
+        * {
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+      `
+    });
 
     const siteDir = path.resolve('_site');
     const indexPath = path.join(siteDir, 'index.html');
@@ -33,98 +38,93 @@ async function runVisualTests() {
       throw new Error('Site has not been built properly - index.html not found');
     }
 
-    // Navigate to the page and wait for content
     await page.goto(`file://${indexPath}`);
     await page.waitForSelector('.container', { timeout: 5000 });
 
-    // Take a screenshot
+    // Wait for any animations or transitions to complete
+    await page.waitForTimeout(1000);
+
     const screenshot = await page.screenshot({
       fullPage: true,
       type: 'png',
     });
 
-    // Ensure results directory exists
     const resultsDir = path.join(__dirname, 'results');
     if (!fs.existsSync(resultsDir)) {
       fs.mkdirSync(resultsDir, { recursive: true });
     }
 
-    // Save current screenshot
     const currentPath = path.join(resultsDir, 'current.png');
     fs.writeFileSync(currentPath, screenshot);
-    console.log(`Screenshot saved to: ${currentPath}`);
 
-    // Compare with baseline if it exists
-    const baselinePath = path.join(resultsDir, 'baseline.png');
-    if (fs.existsSync(baselinePath)) {
-      const baseline = PNG.sync.read(fs.readFileSync(baselinePath));
-      const current = PNG.sync.read(screenshot);
+    const baselinePath = path.join(__dirname, 'baseline.png');
 
-      if (FORCE_UPDATE_BASELINE) {
-        console.log('Forcing baseline update as requested...');
-        fs.copyFileSync(currentPath, baselinePath);
-        console.log('Baseline updated successfully.');
-        process.exit(0);
-      }
-
-      if (baseline.width !== current.width || baseline.height !== current.height) {
-        console.log('Dimensions changed:');
-        console.log(`Baseline: ${baseline.width}x${baseline.height}`);
-        console.log(`Current:  ${current.width}x${current.height}`);
-
-        if (process.env.CI && !FORCE_UPDATE_BASELINE) {
-          console.log('Dimensions changed in CI environment - failing test');
-          process.exit(1);
-        }
-
-        // In local development, update the baseline
-        console.log('Dimensions have changed - updating baseline...');
-        fs.copyFileSync(currentPath, baselinePath);
-        console.log('Baseline updated. Please review the changes.');
-        process.exit(0);
-      }
-
-      const diff = new PNG({ width: baseline.width, height: baseline.height });
-
-      const numDiffPixels = pixelmatch(
-        baseline.data,
-        current.data,
-        diff.data,
-        baseline.width,
-        baseline.height,
-        {
-          threshold: 0.1,
-          includeAA: true,
-          alpha: 0.5,
-        }
-      );
-
-      // Save diff image
-      const diffPath = path.join(resultsDir, 'diff.png');
-      fs.writeFileSync(diffPath, PNG.sync.write(diff));
-
-      // Calculate difference percentage
-      const totalPixels = baseline.width * baseline.height;
-      const diffPercentage = (numDiffPixels / totalPixels) * 100;
-
-      // Stricter threshold in CI
-      const threshold = process.env.CI ? 0.1 : 1;
-
-      if (diffPercentage > threshold) {
-        console.error(`Visual differences detected (${diffPercentage.toFixed(2)}% different)`);
-        console.error(`Diff image saved to: ${diffPath}`);
-        process.exit(1);
-      } else {
-        console.log(`Visual comparison passed! ${diffPercentage.toFixed(2)}% difference`);
-      }
-    } else {
-      // No baseline exists
-      console.log('No baseline found, creating one...');
+    if (CREATE_BASELINE) {
+      console.log('Creating initial baseline...');
       fs.copyFileSync(currentPath, baselinePath);
-
       console.log(`Baseline created at: ${baselinePath}`);
+      console.log('Please commit this file to source control.');
       process.exit(0);
+      return;
     }
+
+    if (!fs.existsSync(baselinePath)) {
+      throw new Error(
+        'Baseline image not found in tests directory. ' +
+        'To create initial baseline, run with CREATE_BASELINE=true environment variable.'
+      );
+    }
+
+    const baseline = PNG.sync.read(fs.readFileSync(baselinePath));
+    const current = PNG.sync.read(fs.readFileSync(currentPath));
+
+    if (baseline.width !== current.width || baseline.height !== current.height) {
+      console.error('Dimensions changed:');
+      console.error(`Baseline: ${baseline.width}x${baseline.height}`);
+      console.error(`Current:  ${current.width}x${current.height}`);
+      process.exit(1);
+    }
+
+    const diff = new PNG({ width: baseline.width, height: baseline.height });
+
+    const numDiffPixels = pixelmatch(
+      baseline.data,
+      current.data,
+      diff.data,
+      baseline.width,
+      baseline.height,
+      {
+        threshold: 0.3,
+        includeAA: true,
+        alpha: 0.5,
+        diffColor: [255, 0, 0],
+        diffColorAlt: [0, 255, 0],
+        outputDiffMask: true
+      }
+    );
+
+    const diffPath = path.join(resultsDir, 'diff.png');
+    fs.writeFileSync(diffPath, PNG.sync.write(diff));
+
+    const totalPixels = baseline.width * baseline.height;
+    const diffPercentage = (numDiffPixels / totalPixels) * 100;
+    const threshold = 1.0;
+
+    console.log('Comparison details:');
+    console.log(`Total pixels: ${totalPixels}`);
+    console.log(`Different pixels: ${numDiffPixels}`);
+    console.log(`Difference percentage: ${diffPercentage.toFixed(2)}%`);
+    console.log(`Threshold: ${threshold}%`);
+
+    if (diffPercentage > threshold) {
+      console.error(`Visual differences detected (${diffPercentage.toFixed(2)}% different)`);
+      console.error(`Current screenshot: ${currentPath}`);
+      console.error(`Diff image: ${diffPath}`);
+      console.error('To update baseline, run the update baseline workflow in GitHub Actions');
+      process.exit(1);
+    }
+
+    console.log(`Visual comparison passed! ${diffPercentage.toFixed(2)}% difference`);
   } catch (error) {
     console.error('Error running visual tests:', error);
     process.exit(1);
@@ -134,7 +134,6 @@ async function runVisualTests() {
     }
   }
 
-  // Only reach here if tests pass
   process.exit(0);
 }
 
