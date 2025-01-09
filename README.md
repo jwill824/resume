@@ -27,30 +27,6 @@ contact:
   location: 'Your Location'
   email: 'your.email@example.com'
   linkedin: 'linkedin-profile-id'
-
-skills:
-  - category: 'Category Name'
-    items: 'Skill 1, Skill 2, Skill 3'
-
-experience:
-  - company: 'Company Name'
-    organization: 'Organization'
-    date: 'Date Range'
-    achievements:
-      - 'Achievement 1'
-      - 'Achievement 2'
-
-certifications:
-  - title: 'Certification Name'
-```
-
-```yaml
-contact:
-  name: 'Your Name'
-  title: 'Your Title'
-  location: 'Your Location'
-  email: 'your.email@example.com'
-  linkedin: 'linkedin-profile-id'
   github: 'github-profile-id'
 
 experience:
