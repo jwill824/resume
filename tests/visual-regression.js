@@ -50,10 +50,11 @@ async function runVisualTests() {
     // Handle baseline creation if requested
     if (CREATE_BASELINE) {
       console.log('Creating initial baseline...');
-      fs.writeFileSync(baselinePath, screenshot);
+      fs.copyFileSync(currentPath, baselinePath);
       console.log(`Baseline created at: ${baselinePath}`);
       console.log('Please commit this file to source control.');
       process.exit(0);
+      return; // Exit early - don't do comparison when creating baseline
     }
 
     // Normal test flow
@@ -65,7 +66,7 @@ async function runVisualTests() {
     }
 
     const baseline = PNG.sync.read(fs.readFileSync(baselinePath));
-    const current = PNG.sync.read(screenshot);
+    const current = PNG.sync.read(fs.readFileSync(currentPath));
 
     if (baseline.width !== current.width || baseline.height !== current.height) {
       console.error('Dimensions changed:');
