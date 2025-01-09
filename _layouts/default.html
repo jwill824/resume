@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ site.data.resume.contact.name }} | {{ site.data.resume.contact.title }}</title>
+  <meta name="description" content="Professional resume of {{ site.data.resume.contact.name }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}" />
+  {% seo title=false %}
+</head>
+
+<body>
+  <div class="container">
+
+    <main role="main">{{ content }}</main>
+
+    <footer role="contentinfo" class="print-only">
+      <p>Last updated: {{ site.time | date: '%B %Y' }}</p>
+    </footer>
+  </div>
+</body>
+
+</html>

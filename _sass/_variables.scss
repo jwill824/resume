@@ -1,0 +1,26 @@
+// _variables.scss
+$primary-color: #1a365d;
+$secondary-color: #2b6cb0;
+$background-color: #fff;
+$text-color: #2d3748;
+$border-color: #e2e8f0;
+$light-text: #4a5568;
+
+// Print variables
+$print-font-body: 11pt;
+$print-font-h1: 18pt;
+$print-font-h2: 14pt;
+$print-margin: 20mm;
+$print-spacing-sm: 4pt;
+$print-spacing-md: 8pt;
+$print-spacing-lg: 12pt;
+$print-spacing-xl: 16pt;
+$print-text-dark: #333;
+
+:root {
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+  --background-color: #{$background-color};
+  --text-color: #{$text-color};
+  --border-color: #{$border-color};
+}
