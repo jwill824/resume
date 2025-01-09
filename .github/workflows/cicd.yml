@@ -72,11 +72,6 @@ jobs:
       - run: |
           npx playwright install chromium --with-deps
           npm install -g @lhci/cli@0.13.x
-      - uses: actions/download-artifact@v4
-        continue-on-error: true
-        with:
-          name: visual-regression-baseline
-          path: tests/results/
       - run: npm test
       - run: npm run test:performance
         env:
@@ -88,12 +83,12 @@ jobs:
             echo "Performance score below threshold: $score"
             exit 1
           fi
-      - if: github.event_name == 'workflow_dispatch' && inputs.update_baseline == 'true' || github.event_name == 'push' && github.ref == 'refs/heads/main'
+      - if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: visual-regression-baseline
-          path: tests/results/baseline.png
-          retention-days: 1
+          name: visual-regression-diff
+          path: tests/results/diff.png
+          retention-days: 7
       - run: |
           echo "Running tests on branch: ${{ needs.detect-branch.outputs.branch-name }}"
 
