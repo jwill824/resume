@@ -8,6 +8,7 @@ import setup from './test-setup.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const CREATE_BASELINE = process.env.CREATE_BASELINE === 'true';
 
 async function runVisualTests() {
   let browser;
@@ -45,8 +46,22 @@ async function runVisualTests() {
     fs.writeFileSync(currentPath, screenshot);
 
     const baselinePath = path.join(__dirname, 'baseline.png');
+
+    // Handle baseline creation if requested
+    if (CREATE_BASELINE) {
+      console.log('Creating initial baseline...');
+      fs.writeFileSync(baselinePath, screenshot);
+      console.log(`Baseline created at: ${baselinePath}`);
+      console.log('Please commit this file to source control.');
+      process.exit(0);
+    }
+
+    // Normal test flow
     if (!fs.existsSync(baselinePath)) {
-      throw new Error('Baseline image not found in tests directory. Please ensure it exists in source control.');
+      throw new Error(
+        'Baseline image not found in tests directory. ' +
+        'To create initial baseline, run with CREATE_BASELINE=true environment variable.'
+      );
     }
 
     const baseline = PNG.sync.read(fs.readFileSync(baselinePath));
