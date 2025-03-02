@@ -8,9 +8,19 @@ contact:
 
 experience:
   - company: Leading EDJE
+    client: Leaf Home Solutions
+    role: Cloud Engineer
+    date: Jan 2025 - Present
+    achievements:
+      - 'Onboarded to Azure DevOps and Azure Cloud within 2 weeks to deliver production-ready code'
+      - 'Developed cli dotnet tool for Microsoft's ServiceBus Emulator, allowing for local development and testing'
+      - 'Developed cli dotnet tool for lead test data generation, reducing manual data entry and saving time on local development'
+      - 'Implemented Azure Functions Ops App to Genesys integration enhancements, that organizes leads into Genesys call buckets based on lead data more effectively, increasing revenue for the inside sales team'
+
+  - company: Leading EDJE
     client: Crown Equipment
     role: DevOps Engineer
-    date: May 2024 - Present
+    date: May 2024 - Dec 2024
     achievements:
       - 'Spearheaded large-scale migration of 180+ production repositories to GitHub Actions, achieving 50% reduction in build times and optimizing release capacity costs'
       - 'Delivered production-ready CI/CD platform by mastering GitHub Actions, Terraform, and AWS within 3 months'
@@ -21,7 +31,7 @@ experience:
 
   - company: Leading EDJE
     client: Leaf Home Solutions
-    role: Backend/Web/Mobile Developer
+    role: Backend/Web/Mobile Engineer
     date: Oct 2022 - May 2024
     achievements:
       - 'Ramped up on Blazor WebAssembly and Azure DevOps within 1 month to deliver production-ready code'
@@ -34,7 +44,7 @@ experience:
 
   - company: Leading EDJE
     client: Crown Equipment
-    role: Backend Software Engineer
+    role: Backend Engineer
     date: Jan 2022 - Sep 2022
     achievements:
       - 'Delivered 9-month project on time and under budget by helping a 5-person scrum team through Agile practices'
@@ -44,7 +54,7 @@ experience:
       - 'Helped integrate OAuth2 solution with Auth0 for External REST APIs, achieving compliance with ISO security standards and ease of use for consumers'
 
   - company: Priority Health / Corewell Health
-    role: Backend Software Engineer
+    role: Backend Engineer
     date: May 2014 - Jan 2022
     achievements:
       - 'Engineered Java APIs integrating Epic and Cerner systems for patient portal serving 500K+ users'
@@ -63,13 +73,17 @@ skills:
   standards: 'ISO, HL7, PCI, HIPAA, FHIR, OpenAPI, OAuth2, JWT'
   data_and_testing: 'Redis, SQL Server, MySQL, Oracle DB, ElSql, JPA, Flyway, Entity Framework, xUnit, bUnit, JUnit, Karate, testcontainers, Jest, Playwright, Puppeteer, Lighthouse CI'
   methodologies: 'Agile, Scrum, Kanban, TDD, Pair Programming, CI/CD, DevOps, Microservices, SOA'
-  integrations: 'Twilio, NetSuite, Epic, Cerner, LexisNexis, Salesforce, Workday, ServiceNow, GitHub, Slack, Teams'
+  integrations: 'Genesys, Twilio, NetSuite, Epic, Cerner, LexisNexis, Salesforce, Workday, ServiceNow, GitHub, Slack, Teams'
 
 projects:
+  - name: Devcontainers
+    description: 'Developed multi repository and project devcontainer configuration that allows for centralized view of projects in Visual Studio Code and idempotent setup'
+    technologies: 'Devcontainers, Docker, Visual Studio Code, GitHub Packages, GitHub Actions, Bash'
+
   - name: AI Sports Prediction Model
     description: 'Developed AI-powered sports prediction model using Azure ML and .NET, achieving projected 10% ROI on NCAA Tournament predictions'
     technologies: 'DotNet, Azure ML, .NET, Machine Learning, Spectre Console'
-    
+
   - name: Resume Portfolio Site
     description: 'Built this resume portfolio site demonstrating various web development technologies and CI/CD practices'
     technologies: 'Jekyll, JavaScript, Babel, Playwright, Jest Puppeteer, Lighthouse CI, SCSS, GitHub Actions, Linting'
