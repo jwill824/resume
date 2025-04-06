@@ -6,12 +6,6 @@ on:
     tags-ignore: ['*']  # Ignore tag pushes
   pull_request:
   workflow_dispatch:
-    inputs:
-      update_baseline:
-        description: 'Update visual regression baseline'
-        required: false
-        type: boolean
-        default: false
 
 permissions:
   contents: write
