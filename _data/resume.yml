@@ -13,7 +13,7 @@ experience:
     date: Jan 2025 - Present
     achievements:
       - 'Onboarded to Azure DevOps and Azure Cloud within 2 weeks to deliver production-ready code'
-      - 'Developed cli dotnet tool for Microsoft's ServiceBus Emulator, allowing for local development and testing'
+      - 'Developed cli dotnet tool for Microsofts ServiceBus Emulator, allowing for local development and testing'
       - 'Developed cli dotnet tool for lead test data generation, reducing manual data entry and saving time on local development'
       - 'Implemented Azure Functions Ops App to Genesys integration enhancements, that organizes leads into Genesys call buckets based on lead data more effectively, increasing revenue for the inside sales team'
 
