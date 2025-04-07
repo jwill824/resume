@@ -6,6 +6,12 @@ on:
     tags-ignore: ['*']  # Ignore tag pushes
   pull_request:
   workflow_dispatch:
+    inputs:
+      disable_visual_regression:
+        description: 'Disable visual regression tests'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -67,6 +73,14 @@ jobs:
           npx playwright install chromium --with-deps
           npm install -g @lhci/cli@0.13.x
       - run: npm test
+      - name: Visual Regression Tests
+        if: github.event_name == 'pull_request' && github.event.action == 'opened'
+        run: |
+          if [ "${{ github.event.inputs.disable_visual_regression }}" != "true" ]; then
+            npm run test:visual-regression
+          else
+            echo "Visual regression tests are disabled."
+          fi
       - run: npm run test:performance
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.GITHUB_TOKEN }}
