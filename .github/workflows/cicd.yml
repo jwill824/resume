@@ -24,6 +24,8 @@ jobs:
     outputs:
       branch-name: ${{ steps.branch-name.outputs.branch }}
       is-main: ${{ steps.branch-check.outputs.is_main }}
+      update-baseline: ${{ steps.commit-check.outputs.update_baseline }}
+      run-visual: ${{ steps.commit-check.outputs.run_visual }}
     steps:
       - id: branch-name
         run: |
@@ -38,6 +40,22 @@ jobs:
             echo "is_main=true" >> $GITHUB_OUTPUT
           else
             echo "is_main=false" >> $GITHUB_OUTPUT
+          fi
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - id: commit-check
+        run: |
+          commit_msg=$(git log -1 --pretty=%B)
+          if [[ $commit_msg == *"[update-baseline]"* ]]; then
+            echo "update_baseline=true" >> $GITHUB_OUTPUT
+          else
+            echo "update_baseline=false" >> $GITHUB_OUTPUT
+          fi
+          if [[ $commit_msg == *"[run-visual]"* ]]; then
+            echo "run_visual=true" >> $GITHUB_OUTPUT
+          else
+            echo "run_visual=false" >> $GITHUB_OUTPUT
           fi
 
   lint:
@@ -73,14 +91,19 @@ jobs:
           npx playwright install chromium --with-deps
           npm install -g @lhci/cli@0.13.x
       - run: npm test
-      - name: Visual Regression Tests
-        if: github.event_name == 'pull_request' && github.event.action == 'opened'
+      - name: Update Visual Regression Baseline
+        if: needs.detect-branch.outputs.update-baseline == 'true'
         run: |
-          if [ "${{ github.event.inputs.disable_visual_regression }}" != "true" ]; then
-            npm run test:visual-regression
-          else
-            echo "Visual regression tests are disabled."
-          fi
+          npm run test:visual
+          cp tests/results/current.png tests/baseline.png
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add tests/baseline.png
+          git commit -m "chore: update visual regression baseline [skip ci]"
+          git push
+      - name: Visual Regression Tests
+        if: needs.detect-branch.outputs.run-visual == 'true'
+        run: npm run test:visual-regression
       - run: npm run test:performance
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.GITHUB_TOKEN }}
