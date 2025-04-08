@@ -26,6 +26,7 @@ jobs:
       is-main: ${{ steps.branch-check.outputs.is_main }}
       update-baseline: ${{ steps.commit-check.outputs.update_baseline }}
       run-visual: ${{ steps.commit-check.outputs.run_visual }}
+      is-dependabot: ${{ steps.actor-check.outputs.is_dependabot }}
     steps:
       - id: branch-name
         run: |
@@ -56,6 +57,13 @@ jobs:
             echo "run_visual=true" >> $GITHUB_OUTPUT
           else
             echo "run_visual=false" >> $GITHUB_OUTPUT
+          fi
+      - id: actor-check
+        run: |
+          if [ "${{ github.actor }}" = "dependabot[bot]" ]; then
+            echo "is_dependabot=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_dependabot=false" >> $GITHUB_OUTPUT
           fi
 
   lint:
@@ -118,7 +126,7 @@ jobs:
 
   deploy:
     needs: [detect-branch, test]
-    if: needs.detect-branch.outputs.is-main == 'true'  # Only deploy on main
+    if: needs.detect-branch.outputs.is-main == 'true' && needs.detect-branch.outputs.is-dependabot != 'true'  # Only deploy on main and not dependabot
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -155,7 +163,7 @@ jobs:
 
   release:
     needs: [detect-branch, deploy]
-    if: needs.detect-branch.outputs.is-main == 'true'  # Only release on main
+    if: needs.detect-branch.outputs.is-main == 'true' && needs.detect-branch.outputs.is-dependabot != 'true'  # Only release on main and not dependabot
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
