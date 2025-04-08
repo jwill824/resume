@@ -2,152 +2,167 @@
  * @jest-environment jsdom
  */
 
-import { jest } from '@jest/globals';
+import { jest } from "@jest/globals";
 
 // First set up the mock objects we'll need
 let mockPage;
 let mockBrowser;
 
-// Mock puppeteer before importing it
-jest.mock('puppeteer', () => {
-  // Create the mock implementation
-  const puppeteerMock = {
-    launch: jest.fn().mockImplementation(() => mockBrowser),
-  };
-  return {
-    __esModule: true,
-    default: puppeteerMock,
-  };
-});
-
-// Mock fs with actual implementation except for readFileSync
-jest.mock('fs', () => ({
-  ...jest.requireActual('fs'),
-  readFileSync: jest.fn(),
+// Mock fs module - update to use ES modules syntax
+jest.mock("node:fs", () => ({
+	default: {
+		readFileSync: jest.fn(),
+	},
+	readFileSync: jest.fn(),
 }));
 
-// Import mocked modules
-import { readFileSync } from 'node:fs';
+// Import fs after mocking
+import fs from "node:fs";
 
-describe('PDF Generation', () => {
-  let generatePDF;
-  let mockConsoleLog;
-  let mockConsoleError;
-  let mockExit;
+// Mock puppeteer before importing it
+jest.mock("puppeteer", () => ({
+	__esModule: true,
+	default: {
+		launch: jest.fn().mockImplementation(() => mockBrowser),
+	},
+}));
 
-  beforeEach(async () => {
-    // Clear all mocks
-    jest.clearAllMocks();
+describe("PDF Generation", () => {
+	let generatePDF;
+	let mockConsoleLog;
+	let mockConsoleError;
+	let mockExit;
 
-    // Setup mock page
-    mockPage = {
-      setViewport: jest.fn().mockResolvedValue(undefined),
-      goto: jest.fn().mockResolvedValue(undefined),
-      addStyleTag: jest.fn().mockResolvedValue(undefined),
-      evaluate: jest.fn().mockResolvedValue(undefined),
-      pdf: jest.fn().mockResolvedValue(undefined),
-    };
+	beforeEach(async () => {
+		// Clear all mocks
+		jest.clearAllMocks();
 
-    // Setup mock browser
-    mockBrowser = {
-      newPage: jest.fn().mockResolvedValue(mockPage),
-      close: jest.fn().mockResolvedValue(undefined),
-    };
+		// Setup mock page
+		mockPage = {
+			setViewport: jest.fn().mockResolvedValue(undefined),
+			goto: jest.fn().mockResolvedValue(undefined),
+			addStyleTag: jest.fn().mockResolvedValue(undefined),
+			evaluate: jest.fn().mockResolvedValue(undefined),
+			pdf: jest.fn().mockResolvedValue(undefined),
+		};
 
-    // Mock console methods
-    mockConsoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
-    mockConsoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+		// Setup mock browser
+		mockBrowser = {
+			newPage: jest.fn().mockResolvedValue(mockPage),
+			close: jest.fn().mockResolvedValue(undefined),
+		};
 
-    // Mock process.exit
-    mockExit = jest.spyOn(process, 'exit').mockImplementation(() => {});
+		// Mock console methods
+		mockConsoleLog = jest.spyOn(console, "log").mockImplementation(() => {});
+		mockConsoleError = jest
+			.spyOn(console, "error")
+			.mockImplementation(() => {});
 
-    // Setup fs mock
-    readFileSync.mockReturnValue('mock-css-content');
+		// Mock process.exit
+		mockExit = jest.spyOn(process, "exit").mockImplementation(() => {});
 
-    // Re-import the module under test for each test
-    jest.isolateModules(async () => {
-      const { default: importedGeneratePDF } = await import('../scripts/generate-pdf.js');
-      generatePDF = importedGeneratePDF;
-    });
-  });
+		// Update fs mock implementation
+		fs.readFileSync.mockReturnValue("mock-css-content");
+		fs.default.readFileSync.mockReturnValue("mock-css-content");
 
-  afterEach(() => {
-    mockConsoleLog.mockRestore();
-    mockConsoleError.mockRestore();
-    mockExit.mockRestore();
-  });
+		// Re-import the module under test for each test
+		jest.isolateModules(async () => {
+			const { default: importedGeneratePDF } = await import(
+				"../scripts/generate-pdf.js"
+			);
+			generatePDF = importedGeneratePDF;
+		});
+	});
 
-  it('should set correct viewport dimensions', async () => {
-    await generatePDF();
+	afterEach(() => {
+		mockConsoleLog.mockRestore();
+		mockConsoleError.mockRestore();
+		mockExit.mockRestore();
+	});
 
-    expect(mockPage.setViewport).toHaveBeenCalledWith({
-      width: 1200,
-      height: 800,
-    });
-  });
+	it("should set correct viewport dimensions", async () => {
+		await generatePDF();
 
-  it('should read and inject CSS correctly', async () => {
-    await generatePDF();
+		expect(mockPage.setViewport).toHaveBeenCalledWith({
+			width: 1200,
+			height: 800,
+		});
+	});
 
-    expect(readFileSync).toHaveBeenCalledWith('_site/assets/css/styles.css', 'utf8');
+	it("should read and inject CSS correctly", async () => {
+		await generatePDF();
 
-    expect(mockPage.addStyleTag).toHaveBeenCalledWith({
-      content: 'mock-css-content',
-    });
-  });
+		expect(fs.readFileSync).toHaveBeenCalledWith(
+			"_site/assets/css/styles.css",
+			"utf8",
+		);
 
-  it('should navigate to correct HTML file', async () => {
-    await generatePDF();
+		expect(mockPage.addStyleTag).toHaveBeenCalledWith({
+			content: "mock-css-content",
+		});
+	});
 
-    const expectedPath = `file:${process.cwd()}/_site/index.html`;
-    expect(mockPage.goto).toHaveBeenCalledWith(expectedPath, {
-      waitUntil: ['networkidle0', 'domcontentloaded'],
-    });
-  });
+	it("should navigate to correct HTML file", async () => {
+		await generatePDF();
 
-  it('should generate PDF with correct settings', async () => {
-    await generatePDF();
+		const expectedPath = `file:${process.cwd()}/_site/index.html`;
+		expect(mockPage.goto).toHaveBeenCalledWith(expectedPath, {
+			waitUntil: ["networkidle0", "domcontentloaded"],
+		});
+	});
 
-    expect(mockPage.pdf).toHaveBeenCalledWith({
-      path: '_site/resume.pdf',
-      format: 'A4',
-      margin: {
-        top: '20px',
-        right: '20px',
-        bottom: '20px',
-        left: '20px',
-      },
-      printBackground: true,
-      preferCSSPageSize: true,
-    });
-  });
+	it("should generate PDF with correct settings", async () => {
+		await generatePDF();
 
-  it('should close browser after PDF generation', async () => {
-    await generatePDF();
+		expect(mockPage.pdf).toHaveBeenCalledWith({
+			path: "_site/resume.pdf",
+			format: "A4",
+			margin: {
+				top: "20px",
+				right: "20px",
+				bottom: "20px",
+				left: "20px",
+			},
+			printBackground: true,
+			preferCSSPageSize: true,
+		});
+	});
 
-    expect(mockBrowser.close).toHaveBeenCalled();
-    expect(mockConsoleLog).toHaveBeenCalledWith('PDF generated successfully');
-  });
+	it("should close browser after PDF generation", async () => {
+		await generatePDF();
 
-  it('should handle file read errors', async () => {
-    const fileError = new Error('File not found');
-    readFileSync.mockImplementation(() => {
-      throw fileError;
-    });
+		expect(mockBrowser.close).toHaveBeenCalled();
+		expect(mockConsoleLog).toHaveBeenCalledWith("PDF generated successfully");
+	});
 
-    await generatePDF();
+	it("should handle file read errors", async () => {
+		const fileError = new Error("File not found");
+		fs.readFileSync.mockImplementationOnce(() => {
+			throw fileError;
+		});
+		fs.default.readFileSync.mockImplementationOnce(() => {
+			throw fileError;
+		});
 
-    expect(mockConsoleError).toHaveBeenCalledWith('Error generating PDF:', fileError);
-    expect(mockExit).toHaveBeenCalledWith(1);
-  });
+		await generatePDF();
 
-  it('should handle page operation errors', async () => {
-    const pageError = new Error('Page operation failed');
-    mockPage.pdf.mockRejectedValueOnce(pageError);
+		expect(mockConsoleError).toHaveBeenCalledWith(
+			"Error generating PDF:",
+			fileError,
+		);
+		expect(mockExit).toHaveBeenCalledWith(1);
+	});
 
-    await generatePDF();
+	it("should handle page operation errors", async () => {
+		const pageError = new Error("Page operation failed");
+		mockPage.pdf.mockRejectedValueOnce(pageError);
 
-    expect(mockConsoleError).toHaveBeenCalledWith('Error generating PDF:', pageError);
-    expect(mockExit).toHaveBeenCalledWith(1);
-  });
+		await generatePDF();
+
+		expect(mockConsoleError).toHaveBeenCalledWith(
+			"Error generating PDF:",
+			pageError,
+		);
+		expect(mockExit).toHaveBeenCalledWith(1);
+	});
 });
