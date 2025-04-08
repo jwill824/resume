@@ -4,7 +4,6 @@ on:
   push:
     branches: ['**']  # Run on all branches
     tags-ignore: ['*']  # Ignore tag pushes
-  pull_request:
   workflow_dispatch:
     inputs:
       disable_visual_regression:
