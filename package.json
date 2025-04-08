@@ -1,6 +1,6 @@
 {
   "name": "resume-site",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Professional resume website with comprehensive testing",
   "type": "module",
   "scripts": {
