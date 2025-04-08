@@ -59,7 +59,7 @@ jobs:
           fi
       - id: actor-check
         run: |
-          if [[ "${{ github.actor }}" == *"dependabot"* ]]; then
+          if [[ "${{ github.event.head_commit.author.name }}" == "dependabot[bot]" ]]; then
             echo "is_dependabot=true" >> $GITHUB_OUTPUT
           else
             echo "is_dependabot=false" >> $GITHUB_OUTPUT
