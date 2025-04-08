@@ -1,9 +1,9 @@
-import { chromium } from 'playwright';
-import fs from 'fs';
-import path from 'path';
-import { PNG } from 'pngjs';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import pixelmatch from 'pixelmatch';
-import { fileURLToPath } from 'url';
+import { chromium } from 'playwright';
+import { PNG } from 'pngjs';
 import setup from './test-setup.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -28,7 +28,7 @@ async function runVisualTests() {
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
         }
-      `
+      `,
     });
 
     const siteDir = path.resolve('_site');
@@ -71,7 +71,7 @@ async function runVisualTests() {
     if (!fs.existsSync(baselinePath)) {
       throw new Error(
         'Baseline image not found in tests directory. ' +
-        'To create initial baseline, run with CREATE_BASELINE=true environment variable.'
+          'To create initial baseline, run with CREATE_BASELINE=true environment variable.'
       );
     }
 
@@ -99,7 +99,7 @@ async function runVisualTests() {
         alpha: 0.5,
         diffColor: [255, 0, 0],
         diffColorAlt: [0, 255, 0],
-        outputDiffMask: true
+        outputDiffMask: true,
       }
     );
 

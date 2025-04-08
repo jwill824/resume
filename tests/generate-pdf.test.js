@@ -27,7 +27,7 @@ jest.mock('fs', () => ({
 }));
 
 // Import mocked modules
-import { readFileSync } from 'fs';
+import { readFileSync } from 'node:fs';
 
 describe('PDF Generation', () => {
   let generatePDF;
@@ -55,11 +55,11 @@ describe('PDF Generation', () => {
     };
 
     // Mock console methods
-    mockConsoleLog = jest.spyOn(console, 'log').mockImplementation(() => { });
-    mockConsoleError = jest.spyOn(console, 'error').mockImplementation(() => { });
+    mockConsoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
+    mockConsoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
 
     // Mock process.exit
-    mockExit = jest.spyOn(process, 'exit').mockImplementation(() => { });
+    mockExit = jest.spyOn(process, 'exit').mockImplementation(() => {});
 
     // Setup fs mock
     readFileSync.mockReturnValue('mock-css-content');
