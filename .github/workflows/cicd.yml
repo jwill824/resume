@@ -4,11 +4,10 @@ on:
   push:
     branches: ['**']  # Run on all branches
     tags-ignore: ['*']  # Ignore tag pushes
-  pull_request:
   workflow_dispatch:
     inputs:
-      update_baseline:
-        description: 'Update visual regression baseline'
+      disable_visual_regression:
+        description: 'Disable visual regression tests'
         required: false
         type: boolean
         default: false
@@ -24,6 +23,9 @@ jobs:
     outputs:
       branch-name: ${{ steps.branch-name.outputs.branch }}
       is-main: ${{ steps.branch-check.outputs.is_main }}
+      update-baseline: ${{ steps.commit-check.outputs.update_baseline }}
+      run-visual: ${{ steps.commit-check.outputs.run_visual }}
+      is-dependabot: ${{ steps.actor-check.outputs.is_dependabot }}
     steps:
       - id: branch-name
         run: |
@@ -38,6 +40,29 @@ jobs:
             echo "is_main=true" >> $GITHUB_OUTPUT
           else
             echo "is_main=false" >> $GITHUB_OUTPUT
+          fi
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - id: commit-check
+        run: |
+          commit_msg=$(git log -1 --pretty=%B)
+          if [[ $commit_msg == *"[update-baseline]"* ]]; then
+            echo "update_baseline=true" >> $GITHUB_OUTPUT
+          else
+            echo "update_baseline=false" >> $GITHUB_OUTPUT
+          fi
+          if [[ $commit_msg == *"[run-visual]"* ]]; then
+            echo "run_visual=true" >> $GITHUB_OUTPUT
+          else
+            echo "run_visual=false" >> $GITHUB_OUTPUT
+          fi
+      - id: actor-check
+        run: |
+          if [ "${{ github.actor }}" = "dependabot[bot]" ]; then
+            echo "is_dependabot=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_dependabot=false" >> $GITHUB_OUTPUT
           fi
 
   lint:
@@ -73,16 +98,22 @@ jobs:
           npx playwright install chromium --with-deps
           npm install -g @lhci/cli@0.13.x
       - run: npm test
+      - name: Update Visual Regression Baseline
+        if: needs.detect-branch.outputs.update-baseline == 'true'
+        run: |
+          npm run test:visual
+          cp tests/results/current.png tests/baseline.png
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add tests/baseline.png
+          git commit -m "chore: update visual regression baseline [skip ci]"
+          git push
+      - name: Visual Regression Tests
+        if: needs.detect-branch.outputs.run-visual == 'true'
+        run: npm run test:visual-regression
       - run: npm run test:performance
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Upload Lighthouse results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: lighthouse-results
-          path: .lighthouseci/
-          retention-days: 7
       - if: failure()
         uses: actions/upload-artifact@v4
         with:
@@ -94,7 +125,7 @@ jobs:
 
   deploy:
     needs: [detect-branch, test]
-    if: needs.detect-branch.outputs.is-main == 'true'  # Only deploy on main
+    if: needs.detect-branch.outputs.is-main == 'true' && needs.detect-branch.outputs.is-dependabot != 'true'  # Only deploy on main and not dependabot
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -131,7 +162,7 @@ jobs:
 
   release:
     needs: [detect-branch, deploy]
-    if: needs.detect-branch.outputs.is-main == 'true'  # Only release on main
+    if: needs.detect-branch.outputs.is-main == 'true' && needs.detect-branch.outputs.is-dependabot != 'true'  # Only release on main and not dependabot
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

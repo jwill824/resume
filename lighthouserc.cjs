@@ -7,7 +7,7 @@ module.exports = {
     assert: {
       assertions: {
         'first-contentful-paint': ['error', { maxNumericValue: 2000 }],
-        'interactive': ['error', { maxNumericValue: 3000 }],
+        interactive: ['error', { maxNumericValue: 3000 }],
         'speed-index': ['error', { maxNumericValue: 2500 }],
         'total-blocking-time': ['error', { maxNumericValue: 200 }],
         'largest-contentful-paint': ['error', { maxNumericValue: 2500 }],

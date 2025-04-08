@@ -231,33 +231,3 @@ npm run build
 # Run tests in watch mode
 npm run test:watch
 ```
-
-## 🔄 Maintenance
-
-### Regular Tasks
-
-1. Update content monthly/quarterly
-2. Run full test suite after updates
-3. Review and update dependencies
-4. Check visual regression baselines
-5. Monitor accessibility compliance
-6. Verify print layout
-7. Update years of experience calculations
-
-### Security
-
-- Keep Jekyll up to date
-- Review GitHub security alerts
-- Update Node.js dependencies
-- Monitor test results for regressions
-
-## 📚 Additional Resources
-
-- [Jekyll Documentation](https://jekyllrb.com/docs/)
-- [Jest Testing Framework](https://jestjs.io/)
-- [Playwright Documentation](https://playwright.dev/)
-- [Lighthouse Documentation](https://developers.google.com/web/tools/lighthouse/)
-
-## 📄 License
-
-This project is open-source and available under the MIT License.

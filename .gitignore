@@ -9,3 +9,4 @@ Gemfile.lock
 .DS_Store
 tests/results/
 .lighthouseci
+.pre-commit-config.yaml

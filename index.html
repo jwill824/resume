@@ -19,16 +19,35 @@ layout: default
   <div class="experience-item">
     <div class="experience-header">
       <div class="company-line">
-        <span class="company">{{ job.company }}{% if job.client %} | {{ job.client }}{% endif %}</span>
+        <span class="company">{{ job.company }}</span>
+      </div>
+    </div>
+    {% if job.assignments %}
+      {% for assignment in job.assignments %}
+      <div class="assignment">
+        <div class="role-line">
+          <span class="client">{{ assignment.client }}</span>
+          <span class="role">{{ assignment.role }}</span>
+          <span class="date">{{ assignment.date }}</span>
+        </div>
+        <ul>
+          {% for achievement in assignment.achievements %}
+          <li>{{ achievement }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    {% else %}
+      <div class="role-line">
         <span class="role">{{ job.role }}</span>
         <span class="date">{{ job.date }}</span>
       </div>
-    </div>
-    <ul>
-      {% for achievement in job.achievements %}
-      <li>{{ achievement }}</li>
-      {% endfor %}
-    </ul>
+      <ul>
+        {% for achievement in job.achievements %}
+        <li>{{ achievement }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
   </div>
   {% endfor %}
 </section>

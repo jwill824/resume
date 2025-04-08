@@ -1,5 +1,5 @@
+import { readFileSync } from 'node:fs';
 import puppeteer from 'puppeteer';
-import { readFileSync } from 'fs';
 
 async function generatePDF() {
   try {
