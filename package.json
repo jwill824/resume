@@ -22,7 +22,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.25.9",
     "@babel/preset-env": "^7.24.0",
     "@biomejs/biome": "^1.9.4",
-    "@lhci/cli": "^0.13.x",
+    "@lhci/cli": "^0.14.x",
     "@testing-library/dom": "^9.3.4",
     "@testing-library/jest-dom": "^6.4.2",
     "babel-jest": "^29.7.0",
